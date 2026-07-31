@@ -34,7 +34,7 @@ export default function VisitorsPage() {
         v.ticketCode.toLowerCase().includes(searchTerm.toLowerCase()) ||
         v.visitorName.toLowerCase().includes(searchTerm.toLowerCase()) ||
         v.visitorEmail.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        v.ticketTierName.toLowerCase().includes(searchTerm.toLowerCase())
+        v.ticketCategory.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }, [visitors, searchTerm]);
 
@@ -45,18 +45,16 @@ export default function VisitorsPage() {
 
   const columns: DataTableColumn<VisitorItem>[] = [
     {
-      key: "ticketCode",
       header: "Ticket Code",
-      render: (row) => (
+      accessor: (row: VisitorItem) => (
         <span style={{ fontFamily: "var(--font-mono)", fontWeight: 600, color: "var(--color-hegra-navy)" }}>
           {row.ticketCode}
         </span>
       ),
     },
     {
-      key: "visitorName",
       header: "Visitor Name",
-      render: (row) => (
+      accessor: (row: VisitorItem) => (
         <div>
           <span style={{ fontWeight: 600, color: "var(--color-hegra-navy)", fontSize: "0.8125rem" }}>
             {row.visitorName}
@@ -67,14 +65,12 @@ export default function VisitorsPage() {
       ),
     },
     {
-      key: "ticketTierName",
       header: "Ticket Tier",
-      render: (row) => <span>{row.ticketTierName}</span>,
+      accessor: (row: VisitorItem) => <span>{row.ticketCategory}</span>,
     },
     {
-      key: "isCheckedIn",
       header: "Check-In Status",
-      render: (row) => (
+      accessor: (row: VisitorItem) => (
         <StatusBadge
           label={row.isCheckedIn ? "Checked In" : "Pending Entry"}
           tone={row.isCheckedIn ? "positive" : "warning"}
@@ -82,19 +78,16 @@ export default function VisitorsPage() {
       ),
     },
     {
-      key: "checkInTime",
       header: "Entry Time",
-      render: (row) => (
+      accessor: (row: VisitorItem) => (
         <span style={{ fontSize: "0.75rem", color: "#6b7280" }}>
           {row.checkInTime || "-"}
         </span>
       ),
     },
     {
-      key: "actions",
       header: "Action",
-      align: "right",
-      render: (row) => (
+      accessor: (row: VisitorItem) => (
         <DashboardButton
           variant={row.isCheckedIn ? "secondary" : "primary"}
           size="sm"
@@ -143,7 +136,34 @@ export default function VisitorsPage() {
 
       {/* Visitors Data Table */}
       <div className={styles.tableCard}>
-        <DataTable data={filteredVisitors} columns={columns} keyExtractor={(item) => item.id} />
+        <DataTable
+          data={filteredVisitors}
+          columns={columns}
+          renderMobileCard={(row: VisitorItem) => (
+            <div style={{ padding: "0.75rem", display: "flex", flexDirection: "column", gap: "0.375rem" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <span style={{ fontFamily: "var(--font-mono)", fontWeight: 600, color: "var(--color-hegra-navy)" }}>
+                  {row.ticketCode}
+                </span>
+                <StatusBadge
+                  label={row.isCheckedIn ? "Checked In" : "Pending Entry"}
+                  tone={row.isCheckedIn ? "positive" : "warning"}
+                />
+              </div>
+              <p style={{ fontWeight: 600, margin: 0 }}>{row.visitorName}</p>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: "0.75rem" }}>
+                <span style={{ color: "#6b7280" }}>{row.ticketCategory}</span>
+                <DashboardButton
+                  variant={row.isCheckedIn ? "secondary" : "primary"}
+                  size="sm"
+                  onClick={() => handleToggleCheckIn(row.id)}
+                >
+                  {row.isCheckedIn ? "Undo" : "Check In"}
+                </DashboardButton>
+              </div>
+            </div>
+          )}
+        />
       </div>
     </div>
   );

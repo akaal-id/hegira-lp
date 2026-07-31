@@ -92,8 +92,8 @@ export default function AccountPage() {
             <input
               type="text"
               required
-              value={account.phoneNumber}
-              onChange={(e) => setAccount({ ...account, phoneNumber: e.target.value })}
+              value={account.phone}
+              onChange={(e) => setAccount({ ...account, phone: e.target.value })}
               className={styles.input}
             />
           </div>

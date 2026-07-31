@@ -14,7 +14,7 @@ export default function CrewPage() {
   const [newCrew, setNewCrew] = useState({
     name: "",
     email: "",
-    role: "Gate Checker" as "Gate Checker" | "Scanner" | "Supervisor" | "Admin",
+    role: "Gate Scanner" as "Gate Scanner" | "Usher" | "Coordinator" | "Admin",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -26,21 +26,21 @@ export default function CrewPage() {
       eventId: "evt-1",
       name: newCrew.name,
       email: newCrew.email,
+      phone: "+62 813-0000-0000",
       role: newCrew.role,
       status: "Active",
-      lastActive: "Just now",
+      addedDate: new Date().toISOString().substring(0, 10),
     };
 
     setCrew((prev) => [...prev, created]);
-    setNewCrew({ name: "", email: "", role: "Gate Checker" });
+    setNewCrew({ name: "", email: "", role: "Gate Scanner" });
     setIsModalOpen(false);
   };
 
   const columns: DataTableColumn<CrewMember>[] = [
     {
-      key: "name",
       header: "Crew Name",
-      render: (row) => (
+      accessor: (row: CrewMember) => (
         <div>
           <span style={{ fontWeight: 600, color: "var(--color-hegra-navy)", fontSize: "0.8125rem" }}>
             {row.name}
@@ -51,18 +51,16 @@ export default function CrewPage() {
       ),
     },
     {
-      key: "role",
       header: "Role / Permission",
-      render: (row) => (
+      accessor: (row: CrewMember) => (
         <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.75rem", fontWeight: 600, color: "var(--color-hegra-turquoise)" }}>
           {row.role}
         </span>
       ),
     },
     {
-      key: "status",
       header: "Status",
-      render: (row) => (
+      accessor: (row: CrewMember) => (
         <StatusBadge
           label={row.status}
           tone={row.status === "Active" ? "positive" : "neutral"}
@@ -70,10 +68,8 @@ export default function CrewPage() {
       ),
     },
     {
-      key: "lastActive",
-      header: "Last Active",
-      align: "right",
-      render: (row) => <span style={{ fontSize: "0.75rem", color: "#6b7280" }}>{row.lastActive}</span>,
+      header: "Added Date",
+      accessor: (row: CrewMember) => <span style={{ fontSize: "0.75rem", color: "#6b7280" }}>{row.addedDate}</span>,
     },
   ];
 
@@ -102,7 +98,27 @@ export default function CrewPage() {
 
       {/* Crew Table */}
       <div className={styles.tableCard}>
-        <DataTable data={crew} columns={columns} keyExtractor={(item) => item.id} />
+        <DataTable
+          data={crew}
+          columns={columns}
+          renderMobileCard={(row: CrewMember) => (
+            <div style={{ padding: "0.75rem", display: "flex", flexDirection: "column", gap: "0.375rem" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <span style={{ fontWeight: 600, color: "var(--color-hegra-navy)", fontSize: "0.875rem" }}>
+                  {row.name}
+                </span>
+                <StatusBadge label={row.status} tone={row.status === "Active" ? "positive" : "neutral"} />
+              </div>
+              <span style={{ fontSize: "0.75rem", color: "#6b7280" }}>{row.email}</span>
+              <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.75rem" }}>
+                <span style={{ fontFamily: "var(--font-mono)", fontWeight: 600, color: "var(--color-hegra-turquoise)" }}>
+                  {row.role}
+                </span>
+                <span style={{ color: "#6b7280" }}>{row.addedDate}</span>
+              </div>
+            </div>
+          )}
+        />
       </div>
 
       {/* Add Crew Modal */}
@@ -158,9 +174,9 @@ export default function CrewPage() {
                   onChange={(e) => setNewCrew({ ...newCrew, role: e.target.value as any })}
                   className={styles.input}
                 >
-                  <option value="Gate Checker">Gate Checker (Scan tickets)</option>
-                  <option value="Scanner">Scanner (Ticket validation only)</option>
-                  <option value="Supervisor">Supervisor (Full gate access)</option>
+                  <option value="Gate Scanner">Gate Scanner (Scan tickets)</option>
+                  <option value="Usher">Usher (Event directions & seating)</option>
+                  <option value="Coordinator">Coordinator (Full gate operations)</option>
                   <option value="Admin">Admin (Full organizer control)</option>
                 </select>
               </div>

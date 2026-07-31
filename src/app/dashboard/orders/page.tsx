@@ -15,9 +15,9 @@ export default function OrdersPage() {
     return orders.filter(
       (ord) =>
         ord.orderNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        ord.customerName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        ord.customerEmail.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        ord.ticketTierName.toLowerCase().includes(searchTerm.toLowerCase())
+        ord.buyerName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        ord.buyerEmail.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        ord.ticketName.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }, [orders, searchTerm]);
 
@@ -30,60 +30,49 @@ export default function OrdersPage() {
 
   const columns: DataTableColumn<OrderItem>[] = [
     {
-      key: "orderNumber",
       header: "Order ID",
-      render: (row) => (
+      accessor: (row: OrderItem) => (
         <span style={{ fontFamily: "var(--font-mono)", fontWeight: 600, color: "var(--color-hegra-navy)" }}>
           {row.orderNumber}
         </span>
       ),
     },
     {
-      key: "customerName",
       header: "Customer",
-      render: (row) => (
+      accessor: (row: OrderItem) => (
         <div className={styles.customerInfo}>
-          <span className={styles.customerName}>{row.customerName}</span>
-          <span className={styles.customerEmail}>{row.customerEmail}</span>
+          <span className={styles.customerName}>{row.buyerName}</span>
+          <span className={styles.customerEmail}>{row.buyerEmail}</span>
         </div>
       ),
     },
     {
-      key: "ticketTierName",
       header: "Ticket Tier",
-      render: (row) => <span>{row.ticketTierName}</span>,
+      accessor: (row: OrderItem) => <span>{row.ticketName}</span>,
     },
     {
-      key: "quantity",
       header: "Qty",
-      align: "center",
-      render: (row) => <span>{row.quantity}</span>,
+      accessor: (row: OrderItem) => <span>{row.quantity}</span>,
     },
     {
-      key: "totalPrice",
       header: "Total Amount",
-      align: "right",
-      render: (row) => (
+      accessor: (row: OrderItem) => (
         <span style={{ fontFamily: "var(--font-mono)", fontWeight: 600 }}>
           Rp {row.totalPrice.toLocaleString("id-ID")}
         </span>
       ),
     },
     {
-      key: "paymentMethod",
-      header: "Payment Method",
-      render: (row) => <span>{row.paymentMethod}</span>,
+      header: "Buyer Phone",
+      accessor: (row: OrderItem) => <span>{row.buyerPhone}</span>,
     },
     {
-      key: "createdAt",
       header: "Date",
-      render: (row) => <span style={{ fontSize: "0.75rem", color: "#6b7280" }}>{row.createdAt}</span>,
+      accessor: (row: OrderItem) => <span style={{ fontSize: "0.75rem", color: "#6b7280" }}>{row.createdDate}</span>,
     },
     {
-      key: "status",
       header: "Status",
-      align: "right",
-      render: (row) => <StatusBadge label={row.status} tone={getStatusTone(row.status)} />,
+      accessor: (row: OrderItem) => <StatusBadge label={row.status} tone={getStatusTone(row.status)} />,
     },
   ];
 
@@ -115,7 +104,27 @@ export default function OrdersPage() {
 
       {/* Orders Data Table */}
       <div className={styles.tableCard}>
-        <DataTable data={filteredOrders} columns={columns} keyExtractor={(item) => item.id} />
+        <DataTable
+          data={filteredOrders}
+          columns={columns}
+          renderMobileCard={(row: OrderItem) => (
+            <div style={{ padding: "0.75rem", display: "flex", flexDirection: "column", gap: "0.375rem" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <span style={{ fontFamily: "var(--font-mono)", fontWeight: 600, color: "var(--color-hegra-navy)" }}>
+                  {row.orderNumber}
+                </span>
+                <StatusBadge label={row.status} tone={getStatusTone(row.status)} />
+              </div>
+              <p style={{ fontWeight: 600, margin: 0 }}>{row.buyerName}</p>
+              <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.75rem", color: "#6b7280" }}>
+                <span>{row.ticketName} (x{row.quantity})</span>
+                <span style={{ fontFamily: "var(--font-mono)", fontWeight: 600, color: "var(--color-hegra-navy)" }}>
+                  Rp {row.totalPrice.toLocaleString("id-ID")}
+                </span>
+              </div>
+            </div>
+          )}
+        />
       </div>
     </div>
   );

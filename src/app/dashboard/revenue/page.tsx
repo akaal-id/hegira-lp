@@ -25,44 +25,36 @@ export default function RevenuePage() {
 
   const columns: DataTableColumn<OrderItem>[] = [
     {
-      key: "orderNumber",
       header: "Order ID",
-      render: (row) => (
+      accessor: (row: OrderItem) => (
         <span style={{ fontFamily: "var(--font-mono)", fontWeight: 600, color: "var(--color-hegra-navy)" }}>
           {row.orderNumber}
         </span>
       ),
     },
     {
-      key: "customerName",
       header: "Customer",
-      render: (row) => <span>{row.customerName}</span>,
+      accessor: (row: OrderItem) => <span>{row.buyerName}</span>,
     },
     {
-      key: "ticketTierName",
       header: "Ticket Tier",
-      render: (row) => <span>{row.ticketTierName}</span>,
+      accessor: (row: OrderItem) => <span>{row.ticketName}</span>,
     },
     {
-      key: "totalPrice",
       header: "Gross Amount",
-      align: "right",
-      render: (row) => (
+      accessor: (row: OrderItem) => (
         <span style={{ fontFamily: "var(--font-mono)", fontWeight: 600 }}>
           Rp {row.totalPrice.toLocaleString("id-ID")}
         </span>
       ),
     },
     {
-      key: "createdAt",
       header: "Payout Date",
-      render: (row) => <span style={{ fontSize: "0.75rem", color: "#6b7280" }}>{row.createdAt}</span>,
+      accessor: (row: OrderItem) => <span style={{ fontSize: "0.75rem", color: "#6b7280" }}>{row.createdDate}</span>,
     },
     {
-      key: "status",
       header: "Payout Status",
-      align: "right",
-      render: (row) => <StatusBadge label="Settled" tone="positive" />,
+      accessor: (row: OrderItem) => <StatusBadge label="Settled" tone="positive" />,
     },
   ];
 
@@ -106,7 +98,27 @@ export default function RevenuePage() {
       <div style={{ marginTop: "1rem" }}>
         <h2 className={styles.sectionTitle}>Settled Transactions</h2>
         <div className={styles.tableCard}>
-          <DataTable data={paidOrders} columns={columns} keyExtractor={(item) => item.id} />
+          <DataTable
+            data={paidOrders}
+            columns={columns}
+            renderMobileCard={(row: OrderItem) => (
+              <div style={{ padding: "0.75rem", display: "flex", flexDirection: "column", gap: "0.375rem" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <span style={{ fontFamily: "var(--font-mono)", fontWeight: 600, color: "var(--color-hegra-navy)" }}>
+                    {row.orderNumber}
+                  </span>
+                  <StatusBadge label="Settled" tone="positive" />
+                </div>
+                <p style={{ fontWeight: 600, margin: 0 }}>{row.buyerName}</p>
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.75rem", color: "#6b7280" }}>
+                  <span>{row.ticketName}</span>
+                  <span style={{ fontFamily: "var(--font-mono)", fontWeight: 600, color: "var(--color-hegra-navy)" }}>
+                    Rp {row.totalPrice.toLocaleString("id-ID")}
+                  </span>
+                </div>
+              </div>
+            )}
+          />
         </div>
       </div>
     </div>
