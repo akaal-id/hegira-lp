@@ -1,0 +1,25 @@
+.graphic {
+  height: auto;
+  width: 100%;
+  max-width: 28rem;
+}
+
+@keyframes networkPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.pulse {
+  animation: networkPulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse {
+    animation: none;
+  }
+}

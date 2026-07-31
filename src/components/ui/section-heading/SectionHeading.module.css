@@ -1,0 +1,86 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.alignCenter {
+  align-items: center;
+  text-align: center;
+}
+
+.alignLeft {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.eyebrowRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.index {
+  color: var(--color-hegra-yellow);
+}
+
+.indexLight {
+  color: var(--color-hegra-turquoise);
+}
+
+.dash {
+  color: color-mix(in srgb, var(--color-hegra-navy) 40%, transparent);
+}
+
+.dashLight {
+  color: color-mix(in srgb, var(--color-hegra-white) 50%, transparent);
+}
+
+.eyebrow {
+  color: color-mix(in srgb, var(--color-hegra-navy) 50%, transparent);
+}
+
+.eyebrowLight {
+  color: color-mix(in srgb, var(--color-hegra-white) 70%, transparent);
+}
+
+.title {
+  max-width: 42rem;
+  font-family: var(--font-jakarta);
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--color-hegra-navy);
+}
+
+@media (min-width: 640px) {
+  .title {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 3rem;
+    line-height: 1;
+  }
+}
+
+.titleLight {
+  color: var(--color-hegra-white);
+}
+
+.subtitle {
+  max-width: 36rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: color-mix(in srgb, var(--color-hegra-navy) 60%, transparent);
+}
+
+.subtitleLight {
+  color: color-mix(in srgb, var(--color-hegra-white) 70%, transparent);
+}

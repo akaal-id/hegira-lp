@@ -1,0 +1,92 @@
+.section {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-hegra-navy);
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+}
+
+.gridBg {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.orbWrap {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.orbPrimary {
+  position: absolute;
+  right: -10%;
+  top: 10%;
+  height: min(45vw, 380px);
+  width: min(45vw, 380px);
+  animation: var(--animate-orb-float-2);
+}
+
+.orbSecondary {
+  position: absolute;
+  left: -8%;
+  bottom: 0;
+  height: min(35vw, 300px);
+  width: min(35vw, 300px);
+  animation: var(--animate-orb-float-3);
+}
+
+.container {
+  position: relative;
+  z-index: 10;
+  margin-inline: auto;
+  max-width: 72rem;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3.5rem;
+}
+
+@media (min-width: 1024px) {
+  .layout {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2.5rem;
+  }
+}
+
+.textCol {
+  display: flex;
+  max-width: 36rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  text-align: center;
+}
+
+@media (min-width: 1024px) {
+  .textCol {
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+.body {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: color-mix(in srgb, var(--color-hegra-white) 60%, transparent);
+}
+
+.graphicCol {
+  width: 100%;
+  max-width: 28rem;
+  flex-shrink: 0;
+}

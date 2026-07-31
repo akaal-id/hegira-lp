@@ -1,26 +1,265 @@
 @import "tailwindcss";
+@import "lenis/dist/lenis.css";
+
+@theme {
+  --color-hegra-turquoise: #4b998e;
+  --color-hegra-yellow: #ebaf4c;
+  --color-hegra-navy: #18093b;
+  --color-hegra-white: #feffff;
+  --color-hegra-deep-navy: #18093b;
+  --color-hegra-light-bg: #feffff;
+  --color-hegra-card-bg: #feffff;
+  --color-hegra-gradient-start: #4b998e;
+  --color-hegra-gradient-mid: #ebaf4c;
+  --color-hegra-gradient-end: #ebaf4c;
+  --color-hegra-chino: #d0cea9;
+
+  --animate-fade-in-up: fadeInUp 0.8s ease-out forwards;
+  --animate-fade-in: fadeIn 0.8s ease-out forwards;
+  --animate-slide-in-left: slideInLeft 0.8s ease-out forwards;
+  --animate-glow: glow 2s infinite alternate;
+  --animate-slow-spin: spin 20s linear infinite;
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-hero-bg-pan: heroBgPan 15s ease infinite alternate;
+  --animate-orb-float-1: orbFloat1 18s ease-in-out infinite;
+  --animate-orb-float-2: orbFloat2 22s ease-in-out infinite;
+  --animate-orb-float-3: orbFloat3 26s ease-in-out infinite;
+  --animate-text-glow: heroTextGlow 4s ease-in-out infinite;
+}
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Glass / elevation system — borrowed from Akaal's card technique, tuned to Hegira's light palette */
+  --hegra-glass-bg: rgba(254, 255, 255, 0.6);
+  --hegra-glass-border: rgba(24, 9, 59, 0.08);
+  --hegra-card-gradient-start: rgba(254, 255, 255, 0.92);
+  --hegra-card-gradient-mid: rgba(254, 255, 255, 0.6);
+  --hegra-card-gradient-end: rgba(75, 153, 142, 0.08);
+  --hegra-shadow-elevated: 0 8px 28px rgba(24, 9, 59, 0.08);
+  --hegra-shadow-elevated-hover: 0 16px 44px rgba(24, 9, 59, 0.1);
+  --hegra-shadow-inset: 0 0 0 1px rgba(24, 9, 59, 0.04) inset;
+  --hegra-grid-line: rgba(24, 9, 59, 0.05);
+  --hegra-glow-turquoise: rgba(75, 153, 142, 0.4);
+  --hegra-glow-yellow: rgba(235, 175, 76, 0.35);
+}
+
+[data-surface="dark"] {
+  --hegra-glass-bg: rgba(24, 9, 59, 0.45);
+  --hegra-glass-border: rgba(254, 255, 255, 0.1);
+  --hegra-card-gradient-start: rgba(254, 255, 255, 0.06);
+  --hegra-card-gradient-mid: rgba(254, 255, 255, 0.02);
+  --hegra-card-gradient-end: rgba(0, 0, 0, 0.2);
+  --hegra-shadow-elevated: 0 8px 28px rgba(0, 0, 0, 0.35);
+  --hegra-shadow-elevated-hover: 0 16px 44px rgba(0, 0, 0, 0.45);
+  --hegra-shadow-inset: 0 0 0 1px rgba(254, 255, 255, 0.06) inset;
+  --hegra-grid-line: rgba(254, 255, 255, 0.05);
+  --hegra-glow-turquoise: rgba(75, 153, 142, 0.55);
+  --hegra-glow-yellow: rgba(235, 175, 76, 0.4);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter), sans-serif;
+  --font-jakarta: var(--font-plus-jakarta-sans), sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-hegra-yellow) 45%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 12px 2px color-mix(in srgb, var(--color-hegra-yellow) 35%, transparent);
+  }
+}
+
+@keyframes heroBgPan {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes orbFloat1 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(8%, 6%) scale(1.06);
+  }
+}
+
+@keyframes orbFloat2 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-6%, -8%) scale(1.08);
+  }
+}
+
+@keyframes orbFloat3 {
+  0%,
+  100% {
+    transform: translate(-50%, 0) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate(-50%, -4%) scale(1.12);
+    opacity: 1;
+  }
+}
+
+@keyframes heroTextGlow {
+  0%,
+  100% {
+    text-shadow: 0 0 0 transparent;
+  }
+  50% {
+    text-shadow:
+      0 0 24px var(--hegra-glow-yellow),
+      0 0 48px var(--hegra-glow-turquoise);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  background-color: var(--color-hegra-white);
+  color: var(--color-hegra-navy);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-jakarta);
+}
+
+/*
+ * Shared design-system primitives. Plain CSS classes, referenced directly by
+ * classNames in TSX (alongside each component's own CSS-module class) —
+ * no Tailwind @apply / @utility involved.
+ */
+
+:focus-visible {
+  outline: 2px solid var(--color-hegra-yellow);
+  outline-offset: 2px;
+}
+
+.focus-on-navy:focus-visible {
+  outline-color: var(--color-hegra-turquoise);
+}
+
+.label-mono {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+.glass-panel {
+  background: linear-gradient(
+    145deg,
+    var(--hegra-card-gradient-start) 0%,
+    var(--hegra-card-gradient-mid) 55%,
+    var(--hegra-card-gradient-end) 100%
+  );
+  border: 1px solid var(--hegra-glass-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--hegra-shadow-inset), var(--hegra-shadow-elevated);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.bg-grid {
+  background-image:
+    linear-gradient(to right, var(--hegra-grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--hegra-grid-line) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+.glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  pointer-events: none;
+  will-change: transform;
+}
+
+.glow-orb-turquoise {
+  background: radial-gradient(circle at 30% 30%, var(--hegra-glow-turquoise), transparent 70%);
+}
+
+.glow-orb-yellow {
+  background: radial-gradient(circle at 60% 40%, var(--hegra-glow-yellow), transparent 72%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glow-orb {
+    animation: none !important;
+  }
+}
+
+.rule {
+  border-top: 1px solid color-mix(in srgb, var(--color-hegra-navy) 10%, transparent);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

@@ -1,0 +1,133 @@
+.stage {
+  --slide-width: min(70vw, 720px);
+  --slide-gap: clamp(1rem, 2.5vw, 1.5rem);
+  --slide-step: calc(var(--slide-width) + var(--slide-gap));
+  position: relative;
+  width: 100%;
+  overflow: visible;
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  gap: var(--slide-gap);
+  width: max-content;
+  height: 520px;
+  padding-inline: calc(50% - var(--slide-width) / 2);
+  transform: translateX(calc(-1 * var(--active-index, 0) * var(--slide-step)));
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.trackInstant {
+  transition: none;
+}
+
+.slide {
+  position: relative;
+  flex: 0 0 var(--slide-width);
+  width: var(--slide-width);
+  aspect-ratio: 16 / 9;
+  border-radius: 1rem;
+  overflow: hidden;
+  transform: scale(0.88);
+  opacity: 1;
+  filter: blur(2px) brightness(0.85);
+  box-shadow: var(--hegra-shadow-inset), var(--hegra-shadow-elevated);
+  transition:
+    transform 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.7s ease,
+    filter 0.7s ease,
+    box-shadow 0.7s ease;
+}
+
+.trackInstant .slide {
+  transition: none;
+}
+
+.slideActive {
+  z-index: 1;
+  transform: scale(1.2);
+  opacity: 1;
+  filter: none;
+  box-shadow: var(--hegra-shadow-inset), var(--hegra-shadow-elevated-hover);
+}
+
+.slideImage {
+  object-fit: cover;
+}
+
+.controls {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.navButton,
+.dots {
+  height: 2.5rem;
+  border-radius: 9999px;
+  background: linear-gradient(
+    145deg,
+    var(--hegra-card-gradient-start) 0%,
+    var(--hegra-card-gradient-mid) 60%,
+    var(--hegra-card-gradient-end) 100%
+  );
+  border: 1px solid var(--hegra-glass-border);
+  box-shadow: var(--hegra-shadow-inset), var(--hegra-shadow-elevated);
+}
+
+.navButton {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  color: var(--color-hegra-navy);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.navButton:hover {
+  box-shadow: var(--hegra-shadow-inset), var(--hegra-shadow-elevated-hover);
+  transform: translateY(-1px);
+}
+
+.dots {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-inline: 1rem;
+}
+
+.dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--color-hegra-navy) 20%, transparent);
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.dot:hover {
+  background: color-mix(in srgb, var(--color-hegra-navy) 35%, transparent);
+}
+
+.dotActive {
+  width: 1.5rem;
+  border-radius: 9999px;
+  background: var(--color-hegra-yellow);
+}
+
+@media (max-width: 640px) {
+  .stage {
+    --slide-width: 78vw;
+    --slide-gap: 0.75rem;
+  }
+
+  .slideActive {
+    transform: scale(1.08);
+  }
+}

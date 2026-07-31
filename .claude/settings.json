@@ -1,7 +1,19 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npx --yes create-next-app@latest . --typescript --tailwind --app --eslint --src-dir --import-alias \"@/*\" --use-npm --no-git)"
+      "Bash(npx --yes create-next-app@latest . --typescript --tailwind --app --eslint --src-dir --import-alias \"@/*\" --use-npm --no-git)",
+      "Bash(cd \"c:/Users/Indra/Documents/Codes/hegira/landing-page\" && mkdir -p src/components/sections)",
+      "Bash(timeout 25 npm run dev)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(ls -la \"c:/Users/Indra/Documents/Codes/AKAAL\" 2>&1)",
+      "Read(//c/Users/Indra/Documents/Codes/AKAAL/**)",
+      "Bash(cd \"C:\\\\Users\\\\Indra\\\\Documents\\\\Codes\\\\AKAAL\" && ls -la)",
+      "Bash(node -e \"console.log\\(require\\('fs'\\).readFileSync\\('node_modules/lenis/package.json','utf8'\\)\\)\")",
+      "WebFetch(domain:akaal.id)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\Indra\\Documents\\Codes\\hegira\\landing-page\\src\\components"
     ]
   }
 }

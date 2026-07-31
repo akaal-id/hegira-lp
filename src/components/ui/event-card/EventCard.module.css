@@ -1,0 +1,83 @@
+.card {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: 1rem;
+  width: 16rem;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  transition: border-color 0.2s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+@media (min-width: 640px) {
+  .card {
+    width: 100%;
+  }
+}
+
+.card:hover {
+  border-color: color-mix(in srgb, var(--color-hegra-yellow) 40%, transparent);
+  box-shadow: var(--hegra-shadow-inset), var(--hegra-shadow-elevated-hover);
+  transform: translateY(-2px);
+}
+
+.icon {
+  display: flex;
+  height: 3rem;
+  width: 3rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  font-family: var(--font-jakarta);
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+}
+
+.iconB2c {
+  background-image: linear-gradient(
+    to bottom right,
+    var(--color-hegra-turquoise),
+    color-mix(in srgb, var(--color-hegra-turquoise) 70%, transparent)
+  );
+  color: var(--color-hegra-white);
+}
+
+.iconB2b {
+  background-image: linear-gradient(
+    to bottom right,
+    var(--color-hegra-navy),
+    color-mix(in srgb, var(--color-hegra-navy) 70%, transparent)
+  );
+  color: var(--color-hegra-white);
+}
+
+.iconB2g {
+  background-image: linear-gradient(
+    to bottom right,
+    var(--color-hegra-yellow),
+    color-mix(in srgb, var(--color-hegra-yellow) 70%, transparent)
+  );
+  color: var(--color-hegra-navy);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.name {
+  font-family: var(--font-jakarta);
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 700;
+  color: var(--color-hegra-navy);
+}
+
+.meta {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: color-mix(in srgb, var(--color-hegra-navy) 60%, transparent);
+}

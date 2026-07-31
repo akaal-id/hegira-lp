@@ -1,0 +1,145 @@
+.section {
+  position: relative;
+  overflow: hidden;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-bottom: 6rem;
+  padding-top: 8rem;
+}
+
+@media (min-width: 640px) {
+  .section {
+    padding-top: 11rem;
+  }
+}
+
+.gridBg {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.orbWrap {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.orbPrimary {
+  position: absolute;
+  left: -8%;
+  top: -10%;
+  height: min(50vw, 420px);
+  width: min(50vw, 420px);
+  animation: var(--animate-orb-float-1);
+}
+
+.orbSecondary {
+  position: absolute;
+  right: -6%;
+  bottom: 5%;
+  height: min(40vw, 360px);
+  width: min(40vw, 360px);
+  animation: var(--animate-orb-float-2);
+}
+
+.fadeBottom {
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  height: 14rem;
+  background: linear-gradient(to bottom, transparent, var(--color-hegra-white));
+}
+
+.content {
+  position: relative;
+  z-index: 10;
+  margin-inline: auto;
+  display: flex;
+  max-width: 48rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.75rem;
+  text-align: center;
+}
+
+.eyebrow {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: var(--color-hegra-yellow);
+}
+
+.title {
+  font-family: var(--font-jakarta);
+  font-size: 1.8rem;
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+@media (min-width: 640px) {
+  .title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .title {
+    font-size: 3.5rem;
+  }
+}
+
+.titleEm {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(
+    to right,
+    var(--color-hegra-yellow),
+    var(--color-hegra-turquoise)
+  );
+  animation: var(--animate-text-glow);
+  animation-delay: 1.2s;
+}
+
+.subtitle {
+  max-width: 36rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: color-mix(in srgb, var(--color-hegra-navy) 60%, transparent);
+}
+
+@media (min-width: 640px) {
+  .subtitle {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+}
+
+.actions {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .actions {
+    flex-direction: row;
+  }
+}
+
+.mockupWrap {
+  position: relative;
+  z-index: 10;
+  margin-inline: auto;
+  margin-top: 3.5rem;
+  max-width: 72rem;
+}
