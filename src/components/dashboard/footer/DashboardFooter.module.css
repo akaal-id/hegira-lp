@@ -1,0 +1,11 @@
+.footer {
+  padding: 1rem;
+  text-align: center;
+  background-color: var(--color-hegra-white);
+  border-top: 1px solid color-mix(in srgb, var(--color-hegra-navy) 8%, transparent);
+}
+
+.text {
+  font-size: 0.75rem;
+  color: color-mix(in srgb, var(--color-hegra-navy) 50%, transparent);
+}

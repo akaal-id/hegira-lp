@@ -1,0 +1,51 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--color-hegra-navy) 10%, transparent);
+  background-color: var(--color-hegra-card-bg);
+  transition: border-color 0.25s ease;
+}
+
+.card:hover {
+  border-color: color-mix(in srgb, var(--color-hegra-turquoise) 30%, transparent);
+}
+
+.iconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 999px;
+  margin-bottom: 1rem;
+}
+
+.turquoise {
+  background-color: color-mix(in srgb, var(--color-hegra-turquoise) 12%, transparent);
+  color: var(--color-hegra-turquoise);
+}
+
+.yellow {
+  background-color: color-mix(in srgb, var(--color-hegra-yellow) 15%, transparent);
+  color: var(--color-hegra-yellow);
+}
+
+.title {
+  font-family: var(--font-jakarta);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-hegra-deep-navy);
+  margin-bottom: 0.5rem;
+}
+
+.description {
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--color-hegra-navy) 65%, transparent);
+  flex-grow: 1;
+}

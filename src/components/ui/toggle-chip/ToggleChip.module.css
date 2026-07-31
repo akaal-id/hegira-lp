@@ -1,0 +1,27 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 0.875rem;
+  font-size: 0.8125rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--color-hegra-navy) 15%, transparent);
+  background-color: transparent;
+  color: var(--color-hegra-navy);
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.chip:hover {
+  border-color: var(--color-hegra-turquoise);
+  color: var(--color-hegra-turquoise);
+}
+
+.selected,
+.selected:hover {
+  background-color: var(--color-hegra-navy);
+  border-color: var(--color-hegra-navy);
+  color: var(--color-hegra-white);
+}

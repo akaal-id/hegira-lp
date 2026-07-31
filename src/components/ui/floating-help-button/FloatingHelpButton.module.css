@@ -1,0 +1,77 @@
+.wrap {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 20;
+}
+
+.fab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 999px;
+  background-color: var(--color-hegra-navy);
+  color: var(--color-hegra-white);
+  box-shadow: 0 10px 26px rgba(24, 9, 59, 0.22);
+  transition: background-color 0.25s ease, transform 0.2s ease;
+}
+
+.fab:hover {
+  background-color: var(--color-hegra-turquoise);
+  transform: translateY(-1px);
+}
+
+.subButtons {
+  position: absolute;
+  bottom: calc(100% + 0.75rem);
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.subButtonRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.subLabel {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8125rem;
+  border-radius: 999px;
+  background-color: var(--color-hegra-navy);
+  color: var(--color-hegra-white);
+  white-space: nowrap;
+}
+
+.subIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 999px;
+  color: var(--color-hegra-white);
+  box-shadow: 0 6px 16px rgba(24, 9, 59, 0.18);
+  transition: transform 0.2s ease;
+}
+
+.subButtonRow:hover .subIcon {
+  transform: scale(1.06);
+}
+
+.turquoise {
+  background-color: var(--color-hegra-turquoise);
+}
+
+.red {
+  background-color: #e05252;
+}
+
+.green {
+  background-color: #3fa66a;
+}

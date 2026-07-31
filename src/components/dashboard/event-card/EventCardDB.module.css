@@ -1,0 +1,93 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid color-mix(in srgb, var(--color-hegra-navy) 10%, transparent);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background-color: var(--color-hegra-card-bg);
+  transition: border-color 0.25s ease;
+}
+
+.card:hover {
+  border-color: color-mix(in srgb, var(--color-hegra-turquoise) 30%, transparent);
+}
+
+.imageWrap {
+  position: relative;
+  width: 100%;
+  padding-top: 42%;
+  overflow: hidden;
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 1.125rem;
+}
+
+.headRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.625rem;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-hegra-deep-navy);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  font-size: 0.8125rem;
+  color: color-mix(in srgb, var(--color-hegra-navy) 65%, transparent);
+  margin-bottom: 0.875rem;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 0.4375rem;
+}
+
+.viewButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4375rem;
+  margin-top: auto;
+  padding-top: 0.75rem;
+  border-top: 1px solid color-mix(in srgb, var(--color-hegra-navy) 8%, transparent);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-hegra-turquoise);
+  transition: color 0.2s ease;
+}
+
+.viewButton:hover {
+  color: var(--color-hegra-navy);
+}
+
+.viewArrow {
+  transition: transform 0.2s ease;
+}
+
+.viewButton:hover .viewArrow {
+  transform: translateX(2px);
+}

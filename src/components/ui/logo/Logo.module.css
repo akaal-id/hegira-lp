@@ -1,0 +1,12 @@
+.logo {
+  width: auto;
+  object-fit: contain;
+}
+
+.default {
+  height: 2.5rem;
+}
+
+.sidebar {
+  height: 2rem;
+}

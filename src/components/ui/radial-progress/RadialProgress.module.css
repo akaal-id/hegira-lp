@@ -1,0 +1,30 @@
+.wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.svg {
+  transform: rotate(-90deg);
+}
+
+.track {
+  stroke: color-mix(in srgb, var(--color-hegra-navy) 10%, transparent);
+}
+
+.progressTurquoise {
+  stroke: var(--color-hegra-turquoise);
+  transition: stroke-dashoffset 0.4s ease-out;
+}
+
+.progressYellow {
+  stroke: var(--color-hegra-yellow);
+  transition: stroke-dashoffset 0.4s ease-out;
+}
+
+.value {
+  position: absolute;
+  font-weight: 700;
+  color: var(--color-hegra-navy);
+}

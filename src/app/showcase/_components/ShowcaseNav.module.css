@@ -1,0 +1,38 @@
+.nav {
+  position: sticky;
+  top: 6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-height: calc(100vh - 8rem);
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.groupTitle {
+  color: color-mix(in srgb, var(--color-hegra-navy) 45%, transparent);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.link {
+  display: block;
+  padding: 0.3rem 0;
+  font-size: 0.8125rem;
+  color: color-mix(in srgb, var(--color-hegra-navy) 70%, transparent);
+  transition: color 0.2s ease;
+}
+
+.link:hover {
+  color: var(--color-hegra-turquoise);
+}

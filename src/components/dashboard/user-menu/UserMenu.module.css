@@ -1,0 +1,75 @@
+.wrap {
+  position: relative;
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.875rem;
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-hegra-navy);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.trigger:hover,
+.triggerOpen {
+  background-color: color-mix(in srgb, var(--color-hegra-turquoise) 10%, transparent);
+  color: var(--color-hegra-turquoise);
+}
+
+.name {
+  max-width: 8rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chevron {
+  transition: transform 0.2s ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + 0.375rem);
+  right: 0;
+  z-index: 10;
+  min-width: 11rem;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--color-hegra-navy) 10%, transparent);
+  background-color: var(--color-hegra-white);
+  box-shadow: 0 16px 36px rgba(24, 9, 59, 0.14);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.625rem 1rem;
+  font-size: 0.8125rem;
+  color: var(--color-hegra-navy);
+  text-align: left;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.item:hover {
+  background-color: color-mix(in srgb, var(--color-hegra-turquoise) 8%, transparent);
+  color: var(--color-hegra-turquoise);
+}
+
+.itemDanger {
+  color: #c94f4f;
+}
+
+.itemDanger:hover {
+  background-color: color-mix(in srgb, #c94f4f 8%, transparent);
+  color: #c94f4f;
+}

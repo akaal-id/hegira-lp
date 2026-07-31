@@ -1,7 +1,7 @@
-import Hero from "@/components/sections/hero/Hero";
-import AboutHegira from "@/components/sections/about-hegira/AboutHegira";
-import FeatureHighlights from "@/components/sections/feature-highlights/FeatureHighlights";
-import BusinessMatching from "@/components/sections/business-matching/BusinessMatching";
+import Hero from "@/app/home/hero/Hero";
+import AboutHegira from "@/app/home/about-hegira/AboutHegira";
+import FeatureHighlights from "@/app/home/feature-highlights/FeatureHighlights";
+import BusinessMatching from "@/app/home/business-matching/BusinessMatching";
 
 export default function Home() {
   return (

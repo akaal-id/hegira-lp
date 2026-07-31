@@ -1,0 +1,45 @@
+.section {
+  padding: 3rem 0;
+  border-top: 1px solid color-mix(in srgb, var(--color-hegra-navy) 8%, transparent);
+  scroll-margin-top: 5.5rem;
+}
+
+.eyebrowRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.index {
+  color: color-mix(in srgb, var(--color-hegra-navy) 40%, transparent);
+}
+
+.dash {
+  color: color-mix(in srgb, var(--color-hegra-navy) 25%, transparent);
+}
+
+.eyebrow {
+  color: var(--color-hegra-turquoise);
+}
+
+.description {
+  max-width: 42rem;
+  margin-bottom: 1.75rem;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--color-hegra-navy) 65%, transparent);
+}
+
+.stage {
+  padding: 2rem;
+  border-radius: 1rem;
+  background-color: color-mix(in srgb, var(--color-hegra-navy) 2.5%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-hegra-navy) 6%, transparent);
+}
+
+@media (max-width: 640px) {
+  .stage {
+    padding: 1.25rem;
+  }
+}

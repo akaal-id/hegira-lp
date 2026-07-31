@@ -28,6 +28,19 @@ export const metadata: Metadata = {
   title: "Hegira — The Integrated Event Platform for Organizers",
   description:
     "Hegira gives organizers everything to sell tickets, manage attendees, and grow B2C, B2B, and B2G events — with a whitelabel experience that feels entirely your own.",
+  manifest: "/favicon/site.webmanifest",
+  icons: {
+    icon: [
+      { url: "/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    shortcut: "/favicon/favicon.ico",
+    apple: "/favicon/apple-touch-icon.png",
+  },
+  other: {
+    "msapplication-config": "/favicon/browserconfig.xml",
+    "msapplication-TileColor": "#18093b",
+  },
   openGraph: {
     title: "Hegira — Run Every Event. On One Platform.",
     description:
