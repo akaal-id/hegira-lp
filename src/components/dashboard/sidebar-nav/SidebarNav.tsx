@@ -4,6 +4,8 @@ import { useEffect, useState, type ElementType } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import Logo from "@/components/ui/logo/Logo";
+import EventSwitcher from "@/components/dashboard/event-switcher/EventSwitcher";
+import { type DashboardEvent } from "@/components/dashboard/mockData";
 import styles from "./SidebarNav.module.css";
 
 export interface SidebarItem {
@@ -15,6 +17,7 @@ export interface SidebarItem {
 
 export interface SidebarSection {
   title: string;
+  badge?: string;
   items: SidebarItem[];
 }
 
@@ -22,11 +25,19 @@ interface SidebarNavProps {
   sections: SidebarSection[];
   activeId: string;
   onSelect?: (id: string) => void;
+  switcherEvents?: DashboardEvent[];
+  activeEventId?: string | null;
 }
 
 const STORAGE_KEY = "hegira-sidebar-collapsed";
 
-export default function SidebarNav({ sections, activeId, onSelect }: SidebarNavProps) {
+export default function SidebarNav({
+  sections,
+  activeId,
+  onSelect,
+  switcherEvents,
+  activeEventId,
+}: SidebarNavProps) {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [hydrated, setHydrated] = useState(false);
 
@@ -58,12 +69,31 @@ export default function SidebarNav({ sections, activeId, onSelect }: SidebarNavP
         </Link>
       </div>
 
+      {/* ── Event Switcher (event mode only) ─────────────── */}
+      {switcherEvents && activeEventId && (
+        <div className={styles.switcherSection}>
+          <EventSwitcher
+            events={switcherEvents}
+            activeEventId={activeEventId}
+            collapsed={isCollapsed}
+            onNavigate={() => onSelect?.(activeEventId)}
+          />
+        </div>
+      )}
+
       {/* ── Navigation ──────────────────────────────────── */}
       <nav className={styles.nav} aria-label="Dashboard navigation">
         {sections.map((section) => (
           <div key={section.title} className={styles.section}>
             {!isCollapsed && (
-              <h3 className={styles.sectionTitle}>{section.title}</h3>
+              <div className={styles.sectionTitleRow}>
+                <h3 className={styles.sectionTitle}>{section.title}</h3>
+                {section.badge && (
+                  <span className={styles.sectionBadge} title={section.badge}>
+                    {section.badge}
+                  </span>
+                )}
+              </div>
             )}
             <div className={styles.items}>
               {section.items.map((item) => {

@@ -1,0 +1,543 @@
+/* =========================================================
+   Shared Dashboard Form Field Components — Style Module
+   ========================================================= */
+
+/* ── Field Shell ──────────────────────────────────────── */
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.labelRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--color-hegra-navy) 85%, transparent);
+}
+
+.required {
+  color: #ef4444;
+}
+
+.helper {
+  font-size: 0.6875rem;
+  color: color-mix(in srgb, var(--color-hegra-navy) 50%, transparent);
+  white-space: nowrap;
+}
+
+/* ── Shared Icon Badge ──────────────────────────────────── */
+.iconBadge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--color-hegra-turquoise) 14%, transparent);
+  color: var(--color-hegra-turquoise);
+}
+
+.iconBadgeSm {
+  width: 1.625rem;
+  height: 1.625rem;
+}
+
+.iconBadgeLg {
+  width: 3rem;
+  height: 3rem;
+}
+
+/* ── Shared Input Base ─────────────────────────────────── */
+.inputBase {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.875rem;
+  font-family: inherit;
+  border-radius: 0.625rem;
+  border: 1px solid rgba(24, 9, 59, 0.12);
+  background: #ffffff;
+  color: var(--color-hegra-navy);
+  outline: none;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.inputBase:focus {
+  border-color: var(--color-hegra-turquoise);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-hegra-turquoise) 20%, transparent);
+}
+
+.inputBase::placeholder {
+  color: color-mix(in srgb, var(--color-hegra-navy) 35%, transparent);
+}
+
+.textarea {
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.inputRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.inputRow > .inputBase {
+  flex: 1;
+}
+
+/* ── Trigger Button (Date / Time) ──────────────────────── */
+.triggerWrapper {
+  position: relative;
+}
+
+.trigger {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.625rem;
+  padding: 0.5rem 0.625rem 0.5rem 0.875rem;
+  font-size: 0.875rem;
+  font-family: inherit;
+  border-radius: 0.625rem;
+  border: 1px solid rgba(24, 9, 59, 0.12);
+  background: #ffffff;
+  color: var(--color-hegra-navy);
+  cursor: pointer;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.trigger:hover {
+  border-color: color-mix(in srgb, var(--color-hegra-turquoise) 50%, transparent);
+}
+
+.triggerOpen {
+  border-color: var(--color-hegra-turquoise);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-hegra-turquoise) 20%, transparent);
+}
+
+.triggerValue {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.triggerPlaceholder {
+  color: color-mix(in srgb, var(--color-hegra-navy) 35%, transparent);
+  font-weight: 400;
+}
+
+/* ── Popover Shell ──────────────────────────────────────── */
+.popover {
+  position: absolute;
+  z-index: 30;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  min-width: 100%;
+  background: #ffffff;
+  border: 1px solid rgba(24, 9, 59, 0.08);
+  border-radius: 0.75rem;
+  box-shadow: 0 16px 32px rgba(24, 9, 59, 0.14);
+  padding: 0.875rem;
+}
+
+/* ── Calendar (Date Picker) ─────────────────────────────── */
+.calendar {
+  width: 17.5rem;
+}
+
+.calendarHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.calendarNavBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 9999px;
+  border: none;
+  background: transparent;
+  color: color-mix(in srgb, var(--color-hegra-navy) 65%, transparent);
+  cursor: pointer;
+  transition: background 150ms ease, color 150ms ease;
+}
+
+.calendarNavBtn:hover {
+  background: color-mix(in srgb, var(--color-hegra-turquoise) 12%, transparent);
+  color: var(--color-hegra-navy);
+}
+
+.calendarMonthLabel {
+  font-family: var(--font-jakarta), sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--color-hegra-navy);
+}
+
+.calendarWeekRow,
+.calendarGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.125rem;
+}
+
+.calendarWeekday {
+  text-align: center;
+  font-size: 0.625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: color-mix(in srgb, var(--color-hegra-navy) 40%, transparent);
+  padding-bottom: 0.5rem;
+}
+
+.calendarDay {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  border-radius: 9999px;
+  border: none;
+  background: transparent;
+  font-size: 0.75rem;
+  color: var(--color-hegra-navy);
+  cursor: pointer;
+  transition: background 150ms ease, color 150ms ease;
+}
+
+.calendarDay:hover {
+  background: color-mix(in srgb, var(--color-hegra-turquoise) 14%, transparent);
+}
+
+.calendarDayMuted {
+  color: color-mix(in srgb, var(--color-hegra-navy) 26%, transparent);
+}
+
+.calendarDayToday::after {
+  content: "";
+  position: absolute;
+  bottom: 0.1875rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 3px;
+  border-radius: 9999px;
+  background: var(--color-hegra-turquoise);
+}
+
+.calendarDayActive {
+  background: var(--color-hegra-turquoise);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.calendarDayActive:hover {
+  background: var(--color-hegra-turquoise);
+}
+
+.calendarDayActive.calendarDayToday::after {
+  background: #ffffff;
+}
+
+/* ── Time Picker ────────────────────────────────────────── */
+.timePopover {
+  width: 14.5rem;
+}
+
+.timeColumnHeaders {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.timeColumnHeaders > span {
+  flex: 1;
+  text-align: center;
+  font-size: 0.625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: color-mix(in srgb, var(--color-hegra-navy) 40%, transparent);
+}
+
+.timeColumns {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.timeColumn {
+  flex: 1;
+  max-height: 11rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1875rem;
+  scrollbar-width: thin;
+}
+
+.timeOption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.375rem 0;
+  border-radius: 0.5rem;
+  border: none;
+  background: transparent;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-hegra-navy);
+  cursor: pointer;
+  transition: background 150ms ease, color 150ms ease;
+}
+
+.timeOption:hover {
+  background: color-mix(in srgb, var(--color-hegra-turquoise) 12%, transparent);
+}
+
+.timeOptionActive {
+  background: var(--color-hegra-turquoise);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.timeOptionActive:hover {
+  background: var(--color-hegra-turquoise);
+}
+
+.periodColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.popoverFooter {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.75rem;
+  padding-top: 0.625rem;
+  border-top: 1px solid rgba(24, 9, 59, 0.08);
+}
+
+.popoverDoneBtn {
+  padding: 0.375rem 0.875rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  border: none;
+  background: var(--color-hegra-turquoise);
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 150ms ease;
+}
+
+.popoverDoneBtn:hover {
+  background: color-mix(in srgb, var(--color-hegra-turquoise) 90%, #000);
+}
+
+/* ── Upload Field ───────────────────────────────────────── */
+.uploadDropzone {
+  position: relative;
+  width: 100%;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 1px dashed rgba(24, 9, 59, 0.18);
+  background: color-mix(in srgb, var(--color-hegra-navy) 1.5%, transparent);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 150ms ease, background 150ms ease;
+}
+
+.uploadDropzone:hover {
+  background: color-mix(in srgb, var(--color-hegra-turquoise) 6%, transparent);
+  border-color: var(--color-hegra-turquoise);
+}
+
+.uploadDropzoneDragging {
+  background: color-mix(in srgb, var(--color-hegra-turquoise) 8%, transparent);
+  border-color: var(--color-hegra-turquoise);
+}
+
+.previewImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.uploadOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(24, 9, 59, 0.65);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 200ms ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  padding: 1rem;
+  text-align: center;
+}
+
+.uploadDropzone:hover .uploadOverlay {
+  opacity: 1;
+}
+
+.uploadOverlay .iconBadge {
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+}
+
+.uploadOverlayTitle {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.uploadOverlaySub {
+  font-size: 0.6875rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin-top: 0.125rem;
+}
+
+.uploadEmpty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: color-mix(in srgb, var(--color-hegra-navy) 40%, transparent);
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.uploadEmptyTitle {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-hegra-navy);
+  margin-top: 0.625rem;
+}
+
+.uploadEmptySub {
+  font-size: 0.75rem;
+  color: color-mix(in srgb, var(--color-hegra-navy) 50%, transparent);
+  margin-top: 0.25rem;
+}
+
+.uploadRemoveBtn {
+  position: absolute;
+  top: 0.625rem;
+  right: 0.625rem;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 9999px;
+  border: none;
+  background: rgba(24, 9, 59, 0.7);
+  color: #ffffff;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 200ms ease, background 150ms ease;
+}
+
+.uploadDropzone:hover .uploadRemoveBtn {
+  opacity: 1;
+}
+
+.uploadRemoveBtn:hover {
+  background: rgba(24, 9, 59, 0.9);
+}
+
+/* ── Rich Text Field ────────────────────────────────────── */
+.richTextShell {
+  border-radius: 0.625rem;
+  border: 1px solid rgba(24, 9, 59, 0.12);
+  background: #ffffff;
+  overflow: hidden;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.richTextShellFocused {
+  border-color: var(--color-hegra-turquoise);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-hegra-turquoise) 20%, transparent);
+}
+
+.richTextToolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.375rem 0.5rem;
+  border-bottom: 1px solid rgba(24, 9, 59, 0.08);
+  background: color-mix(in srgb, var(--color-hegra-navy) 2.5%, transparent);
+}
+
+.richToolDivider {
+  width: 1px;
+  height: 1.125rem;
+  background: rgba(24, 9, 59, 0.12);
+  margin: 0 0.25rem;
+}
+
+.richToolBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 0.5rem;
+  border: none;
+  background: transparent;
+  color: color-mix(in srgb, var(--color-hegra-navy) 60%, transparent);
+  cursor: pointer;
+  transition: background 150ms ease, color 150ms ease;
+}
+
+.richToolBtn:hover {
+  background: color-mix(in srgb, var(--color-hegra-turquoise) 14%, transparent);
+  color: var(--color-hegra-turquoise);
+}
+
+.richTextEditable {
+  padding: 0.75rem 0.875rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--color-hegra-navy);
+  outline: none;
+}
+
+.richTextEditable :global(ul),
+.richTextEditable :global(ol) {
+  padding-left: 1.25rem;
+  margin: 0.375rem 0;
+}
+
+.richTextEditable :global(p) {
+  margin: 0 0 0.5rem;
+}
+
+.richTextEditable:empty::before {
+  content: attr(data-placeholder);
+  color: color-mix(in srgb, var(--color-hegra-navy) 35%, transparent);
+  pointer-events: none;
+}

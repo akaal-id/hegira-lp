@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import SidebarNav, { type SidebarSection } from "@/components/dashboard/sidebar-nav/SidebarNav";
 import TopBar from "@/components/dashboard/top-bar/TopBar";
-import { initialOrganizerAccount } from "@/components/dashboard/mockData";
+import { initialDashboardEvents, initialOrganizerAccount } from "@/components/dashboard/mockData";
 import shellStyles from "./DashboardShell.module.css";
 
 export default function DashboardLayout({
@@ -27,6 +27,24 @@ export default function DashboardLayout({
 }) {
   const pathname = usePathname();
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+  const [activeEventId, setActiveEventId] = useState<string | null>(null);
+  const [trackedPathname, setTrackedPathname] = useState(pathname);
+
+  // Enter "event mode" when viewing a specific event; exit it back at the
+  // event list or the create form. Any other route (Tickets, Coupons, ...)
+  // leaves the current event mode untouched so it persists while browsing
+  // that event's operations. Adjusted during render (not an effect) since
+  // it only needs to react to pathname changes, not synchronize with
+  // anything external.
+  if (pathname !== trackedPathname) {
+    setTrackedPathname(pathname);
+    const eventMatch = pathname.match(/^\/dashboard\/events\/([^/]+)/);
+    if (eventMatch && eventMatch[1] !== "create") {
+      setActiveEventId(eventMatch[1]);
+    } else if (pathname === "/dashboard" || pathname === "/dashboard/events/create") {
+      setActiveEventId(null);
+    }
+  }
 
   // Derive active ID from pathname for sidebar highlighting
   const getActiveId = (): string => {
@@ -36,26 +54,37 @@ export default function DashboardLayout({
 
   const activeId = getActiveId();
 
-  // Sidebar navigation sections with URL hrefs
+  // Sidebar navigation sections with URL hrefs.
+  // Event Management is hidden in event mode — the EventSwitcher (rendered
+  // above these sections) takes over event selection + exiting event mode.
   const sidebarSections: SidebarSection[] = [
-    {
-      title: "Event Management",
-      items: [
-        { id: "/dashboard", label: "Event List", icon: ClipboardList, href: "/dashboard" },
-        { id: "/dashboard/events/create", label: "Create New Event", icon: PlusCircle, href: "/dashboard/events/create" },
-      ],
-    },
-    {
-      title: "Event Operations",
-      items: [
-        { id: "/dashboard/tickets", label: "Tickets", icon: Ticket, href: "/dashboard/tickets" },
-        { id: "/dashboard/coupons", label: "Coupons", icon: Tag, href: "/dashboard/coupons" },
-        { id: "/dashboard/orders", label: "Orders", icon: ShoppingCart, href: "/dashboard/orders" },
-        { id: "/dashboard/visitors", label: "Visitors", icon: Users, href: "/dashboard/visitors" },
-        { id: "/dashboard/crew", label: "Crew", icon: CheckCheck, href: "/dashboard/crew" },
-        { id: "/dashboard/revenue", label: "Revenue", icon: DollarSign, href: "/dashboard/revenue" },
-      ],
-    },
+    ...(activeEventId
+      ? []
+      : [
+          {
+            title: "Event Management",
+            items: [
+              { id: "/dashboard", label: "Event List", icon: ClipboardList, href: "/dashboard" },
+              { id: "/dashboard/events/create", label: "Create New Event", icon: PlusCircle, href: "/dashboard/events/create" },
+            ],
+          } satisfies SidebarSection,
+        ]),
+    ...(activeEventId
+      ? [
+          {
+            title: "Event Operations",
+            items: [
+              { id: `/dashboard/events/${activeEventId}`, label: "Event Details", icon: FileText, href: `/dashboard/events/${activeEventId}` },
+              { id: "/dashboard/tickets", label: "Tickets", icon: Ticket, href: "/dashboard/tickets" },
+              { id: "/dashboard/coupons", label: "Coupons", icon: Tag, href: "/dashboard/coupons" },
+              { id: "/dashboard/orders", label: "Orders", icon: ShoppingCart, href: "/dashboard/orders" },
+              { id: "/dashboard/visitors", label: "Visitors", icon: Users, href: "/dashboard/visitors" },
+              { id: "/dashboard/crew", label: "Crew", icon: CheckCheck, href: "/dashboard/crew" },
+              { id: "/dashboard/revenue", label: "Revenue", icon: DollarSign, href: "/dashboard/revenue" },
+            ],
+          } satisfies SidebarSection,
+        ]
+      : []),
     {
       title: "Organizer Account",
       items: [
@@ -102,6 +131,8 @@ export default function DashboardLayout({
             sections={sidebarSections}
             activeId={activeId}
             onSelect={() => setIsMobileNavOpen(false)}
+            switcherEvents={initialDashboardEvents}
+            activeEventId={activeEventId}
           />
         </aside>
 

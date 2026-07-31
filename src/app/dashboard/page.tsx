@@ -106,6 +106,7 @@ export default function DashboardHomePage() {
                   size="sm"
                   active={statusFilter === f}
                   onClick={() => setStatusFilter(f)}
+                  className={pageStyles.toolbarBtn}
                   style={{ textTransform: "capitalize" }}
                 >
                   {f === "all" ? "All" : f}
@@ -118,6 +119,7 @@ export default function DashboardHomePage() {
               size="sm"
               icon={<PlusCircle size={16} />}
               onClick={() => router.push("/dashboard/events/create")}
+              className={pageStyles.toolbarBtn}
             >
               Create New Event
             </DashboardButton>
