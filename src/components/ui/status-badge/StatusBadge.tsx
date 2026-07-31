@@ -16,7 +16,7 @@ const toneClass: Record<StatusTone, string> = {
 
 export default function StatusBadge({ label, tone }: StatusBadgeProps) {
   return (
-    <span className={styles.badge}>
+    <span className={`label-mono ${styles.badge} ${styles[`badge_${tone}`]}`}>
       <span className={`${styles.dot} ${toneClass[tone]}`} aria-hidden="true" />
       <span className={toneClass[tone]}>{label}</span>
     </span>

@@ -15,16 +15,18 @@
 
 .progressTurquoise {
   stroke: var(--color-hegra-turquoise);
-  transition: stroke-dashoffset 0.4s ease-out;
+  transition: stroke-dashoffset 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .progressYellow {
   stroke: var(--color-hegra-yellow);
-  transition: stroke-dashoffset 0.4s ease-out;
+  transition: stroke-dashoffset 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .value {
   position: absolute;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--color-hegra-navy);
+  letter-spacing: -0.02em;
 }
+

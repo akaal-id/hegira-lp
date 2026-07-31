@@ -149,12 +149,12 @@ export default function DataTable<T>({
         )}
       </div>
 
-      <div className={styles.tableWrap}>
+      <div className={`glass-panel ${styles.tableWrap}`}>
         <table className={styles.table}>
           <thead>
             <tr>
               {columns.map((col) => (
-                <th key={col.header} scope="col" className={styles.th}>
+                <th key={col.header} scope="col" className={`label-mono ${styles.th}`}>
                   {col.header}
                 </th>
               ))}
@@ -183,7 +183,7 @@ export default function DataTable<T>({
       </div>
 
       <div className={styles.pagination}>
-        <span className={styles.pageInfo}>
+        <span className={`label-mono ${styles.pageInfo}`}>
           Page {currentPage} of {totalPages} · {filtered.length} items
         </span>
         <div className={styles.pageButtons}>

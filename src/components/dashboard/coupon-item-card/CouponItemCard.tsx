@@ -19,12 +19,14 @@ interface CouponItemCardProps {
   coupon: CouponItemData;
 }
 
+import CopyableText from "@/components/ui/copyable-text/CopyableText";
+
 export default function CouponItemCard({ coupon }: CouponItemCardProps) {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
   return (
     <>
-      <div className={styles.card}>
+      <div className={`glass-panel ${styles.card}`}>
         <div className={styles.body}>
           <div className={styles.headRow}>
             <div className={styles.titleWrap}>
@@ -33,7 +35,7 @@ export default function CouponItemCard({ coupon }: CouponItemCardProps) {
             </div>
             <div className={styles.actions}>
               <button type="button" aria-label={`Edit ${coupon.name}`} className={styles.actionEdit}>
-                <Edit3 size={16} />
+                <Edit3 size={15} />
               </button>
               <button
                 type="button"
@@ -41,32 +43,32 @@ export default function CouponItemCard({ coupon }: CouponItemCardProps) {
                 onClick={() => setIsDeleteOpen(true)}
                 className={styles.actionDelete}
               >
-                <Trash2 size={16} />
+                <Trash2 size={15} />
               </button>
             </div>
           </div>
 
-          <p className={styles.eventName}>{coupon.eventName}</p>
+          <p className={`label-mono ${styles.eventName}`}>{coupon.eventName}</p>
 
           <dl className={styles.stats}>
             <div className={styles.statRow}>
-              <dt>Discount</dt>
-              <dd>{coupon.discountLabel}</dd>
+              <dt className="label-mono">Discount</dt>
+              <dd className={`label-mono ${styles.discountBadge}`}>{coupon.discountLabel}</dd>
             </div>
             <div className={styles.statRow}>
-              <dt>Quantity</dt>
-              <dd>{coupon.quantity}</dd>
+              <dt className="label-mono">Quantity</dt>
+              <dd className="label-mono">{coupon.quantity}</dd>
             </div>
             <div className={styles.statRow}>
-              <dt>Validity</dt>
-              <dd>{coupon.validity}</dd>
+              <dt className="label-mono">Validity</dt>
+              <dd className="label-mono">{coupon.validity}</dd>
             </div>
           </dl>
         </div>
 
-        <div className={styles.footer}>
+        <div className={`label-mono ${styles.footer}`}>
           <span>Coupon code</span>
-          <span className={styles.code}>{coupon.code}</span>
+          <CopyableText value={coupon.code} />
         </div>
       </div>
 

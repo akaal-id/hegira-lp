@@ -64,10 +64,10 @@ export default function AddTicketModal({ isOpen, onClose, onSave }: AddTicketMod
 
   return (
     <div className={styles.backdrop} role="dialog" aria-modal="true" aria-labelledby="add-ticket-modal-title">
-      <div className={styles.panel}>
+      <div className={`glass-panel ${styles.panel}`}>
         <div className={styles.header}>
           <h2 id="add-ticket-modal-title" className={styles.title}>
-            Add ticket
+            Add Ticket Category
           </h2>
           <button type="button" onClick={onClose} aria-label="Close modal" className={styles.close}>
             <X size={20} />
@@ -76,7 +76,7 @@ export default function AddTicketModal({ isOpen, onClose, onSave }: AddTicketMod
 
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.field}>
-            <label htmlFor="ticket-name" className={styles.label}>
+            <label htmlFor="ticket-name" className={`label-mono ${styles.label}`}>
               Ticket name <span className={styles.required}>*</span>
             </label>
             <input
@@ -87,12 +87,12 @@ export default function AddTicketModal({ isOpen, onClose, onSave }: AddTicketMod
               placeholder="e.g. Regular, VIP, Early Bird"
               className={`${styles.input} ${errors.name ? styles.inputError : ""}`}
             />
-            {errors.name && <p className={styles.errorText}>{errors.name}</p>}
+            {errors.name && <p className={`label-mono ${styles.errorText}`}>{errors.name}</p>}
           </div>
 
           <div className={styles.row}>
             <div className={styles.field}>
-              <label htmlFor="ticket-price" className={styles.label}>
+              <label htmlFor="ticket-price" className={`label-mono ${styles.label}`}>
                 Price (IDR) <span className={styles.required}>*</span>
               </label>
               <input
@@ -104,11 +104,11 @@ export default function AddTicketModal({ isOpen, onClose, onSave }: AddTicketMod
                 onChange={(e) => setFormData((prev) => ({ ...prev, price: Number(e.target.value) }))}
                 className={`${styles.input} ${errors.price ? styles.inputError : ""}`}
               />
-              {errors.price && <p className={styles.errorText}>{errors.price}</p>}
+              {errors.price && <p className={`label-mono ${styles.errorText}`}>{errors.price}</p>}
             </div>
 
             <div className={styles.field}>
-              <label htmlFor="ticket-quantity" className={styles.label}>
+              <label htmlFor="ticket-quantity" className={`label-mono ${styles.label}`}>
                 Quantity <span className={styles.required}>*</span>
               </label>
               <input
@@ -119,12 +119,12 @@ export default function AddTicketModal({ isOpen, onClose, onSave }: AddTicketMod
                 onChange={(e) => setFormData((prev) => ({ ...prev, maxQuantity: Number(e.target.value) }))}
                 className={`${styles.input} ${errors.maxQuantity ? styles.inputError : ""}`}
               />
-              {errors.maxQuantity && <p className={styles.errorText}>{errors.maxQuantity}</p>}
+              {errors.maxQuantity && <p className={`label-mono ${styles.errorText}`}>{errors.maxQuantity}</p>}
             </div>
           </div>
 
           <div className={styles.field}>
-            <label htmlFor="ticket-description" className={styles.label}>
+            <label htmlFor="ticket-description" className={`label-mono ${styles.label}`}>
               Description
             </label>
             <textarea
@@ -138,7 +138,7 @@ export default function AddTicketModal({ isOpen, onClose, onSave }: AddTicketMod
           </div>
 
           <div className={styles.scheduleBlock}>
-            <label className={styles.checkboxRow}>
+            <label className={`label-mono ${styles.checkboxRow}`}>
               <input
                 type="checkbox"
                 checked={formData.useEventSchedule}
@@ -151,7 +151,7 @@ export default function AddTicketModal({ isOpen, onClose, onSave }: AddTicketMod
             {!formData.useEventSchedule && (
               <div className={styles.scheduleFields}>
                 <div className={styles.field}>
-                  <label htmlFor="ticket-start-date" className={styles.labelSm}>
+                  <label htmlFor="ticket-start-date" className={`label-mono ${styles.labelSm}`}>
                     Start date
                   </label>
                   <input
@@ -161,10 +161,10 @@ export default function AddTicketModal({ isOpen, onClose, onSave }: AddTicketMod
                     onChange={(e) => setFormData((prev) => ({ ...prev, startDate: e.target.value }))}
                     className={`${styles.inputSm} ${errors.startDate ? styles.inputError : ""}`}
                   />
-                  {errors.startDate && <p className={styles.errorText}>{errors.startDate}</p>}
+                  {errors.startDate && <p className={`label-mono ${styles.errorText}`}>{errors.startDate}</p>}
                 </div>
                 <div className={styles.field}>
-                  <label htmlFor="ticket-start-time" className={styles.labelSm}>
+                  <label htmlFor="ticket-start-time" className={`label-mono ${styles.labelSm}`}>
                     Start time
                   </label>
                   <input
@@ -174,18 +174,18 @@ export default function AddTicketModal({ isOpen, onClose, onSave }: AddTicketMod
                     onChange={(e) => setFormData((prev) => ({ ...prev, startTime: e.target.value }))}
                     className={`${styles.inputSm} ${errors.startTime ? styles.inputError : ""}`}
                   />
-                  {errors.startTime && <p className={styles.errorText}>{errors.startTime}</p>}
+                  {errors.startTime && <p className={`label-mono ${styles.errorText}`}>{errors.startTime}</p>}
                 </div>
               </div>
             )}
           </div>
 
           <div className={styles.actions}>
-            <button type="button" onClick={onClose} className={styles.cancel}>
+            <button type="button" onClick={onClose} className={`label-mono ${styles.cancel}`}>
               Cancel
             </button>
-            <button type="submit" className={styles.submit}>
-              <Save size={16} /> Save ticket
+            <button type="submit" className={`label-mono ${styles.submit}`}>
+              <Save size={15} /> Save Ticket
             </button>
           </div>
         </form>

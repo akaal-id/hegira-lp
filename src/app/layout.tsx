@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
-import SmoothScroll from "@/components/layout/smooth-scroll/SmoothScroll";
-import Navbar from "@/components/layout/navbar/Navbar";
-import Footer from "@/components/layout/footer/Footer";
+import LayoutWrapper from "@/components/layout/LayoutWrapper";
 import styles from "./layout.module.css";
 import "./globals.css";
 
@@ -76,11 +74,7 @@ export default function RootLayout({
       className={`${inter.variable} ${plusJakarta.variable} ${geistMono.variable} ${styles.html}`}
     >
       <body className={styles.body}>
-        <SmoothScroll>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-        </SmoothScroll>
+        <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>
   );

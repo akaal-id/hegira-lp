@@ -37,7 +37,7 @@ export default function FloatingHelpButton() {
               className={styles.subButtonRow}
               aria-label={btn.label}
             >
-              <span className={styles.subLabel}>{btn.label}</span>
+              <span className={`label-mono ${styles.subLabel}`}>{btn.label}</span>
               <span className={`${styles.subIcon} ${styles[btn.tone]}`}>
                 <btn.icon size={20} />
               </span>

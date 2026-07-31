@@ -24,7 +24,7 @@ export default function CopyableText({ value, displayText, className = "" }: Cop
   }, [value]);
 
   return (
-    <span className={`${styles.wrap} ${className}`}>
+    <span className={`label-mono ${styles.wrap} ${className}`}>
       <span className={styles.text}>{displayText ?? value}</span>
       <button
         type="button"
@@ -36,4 +36,5 @@ export default function CopyableText({ value, displayText, className = "" }: Cop
       </button>
     </span>
   );
+
 }

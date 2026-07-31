@@ -2,14 +2,18 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  border: 1px solid color-mix(in srgb, var(--color-hegra-navy) 10%, transparent);
-  border-radius: 0.75rem;
+  border-radius: 0.4rem;
   overflow: hidden;
-  background-color: var(--color-hegra-card-bg);
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.card:hover {
+  border-color: color-mix(in srgb, var(--color-hegra-turquoise) 40%, var(--hegra-glass-border));
+  transform: translateY(-2px);
 }
 
 .body {
-  padding: 1.125rem;
+  padding: 1.25rem;
   flex-grow: 1;
 }
 
@@ -18,7 +22,7 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 0.5rem;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.375rem;
 }
 
 .titleWrap {
@@ -29,14 +33,15 @@
 }
 
 .titleIcon {
-  color: #2f8f5b;
+  color: var(--color-hegra-turquoise);
   flex-shrink: 0;
 }
 
 .title {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--color-hegra-deep-navy);
+  font-family: var(--font-jakarta);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--color-hegra-navy);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -45,7 +50,7 @@
 .actions {
   display: flex;
   align-items: center;
-  gap: 0.375rem;
+  gap: 0.25rem;
   flex-shrink: 0;
 }
 
@@ -54,8 +59,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.25rem;
-  border-radius: 0.375rem;
+  width: 1.875rem;
+  height: 1.875rem;
+  border-radius: 0.4rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
@@ -65,7 +74,7 @@
 
 .actionEdit:hover {
   color: var(--color-hegra-turquoise);
-  background-color: color-mix(in srgb, var(--color-hegra-turquoise) 8%, transparent);
+  background-color: color-mix(in srgb, var(--color-hegra-turquoise) 10%, transparent);
 }
 
 .actionDelete {
@@ -74,20 +83,22 @@
 
 .actionDelete:hover {
   color: #c94f4f;
-  background-color: color-mix(in srgb, #c94f4f 8%, transparent);
+  background-color: color-mix(in srgb, #c94f4f 10%, transparent);
 }
 
 .eventName {
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
   color: color-mix(in srgb, var(--color-hegra-navy) 55%, transparent);
-  margin-bottom: 0.875rem;
+  margin-bottom: 1rem;
 }
 
 .stats {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  font-size: 0.8125rem;
+  gap: 0.625rem;
+  font-size: 0.75rem;
+  margin: 0;
 }
 
 .statRow {
@@ -98,22 +109,30 @@
 }
 
 .statRow dt {
-  color: color-mix(in srgb, var(--color-hegra-navy) 55%, transparent);
+  font-size: 0.6875rem;
+  color: color-mix(in srgb, var(--color-hegra-navy) 50%, transparent);
+}
+
+.statRow dd {
+  font-weight: 600;
+  margin: 0;
 }
 
 .footer {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
-  padding: 0.875rem 1.125rem;
-  border-top: 1px solid color-mix(in srgb, var(--color-hegra-navy) 8%, transparent);
-  background-color: color-mix(in srgb, var(--color-hegra-navy) 2%, transparent);
-  font-size: 0.875rem;
-  color: var(--color-hegra-navy);
+  padding: 0.875rem 1.25rem;
+  border-top: 1px dashed color-mix(in srgb, var(--color-hegra-navy) 15%, transparent);
+  background-color: color-mix(in srgb, var(--color-hegra-navy) 3%, transparent);
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  color: color-mix(in srgb, var(--color-hegra-navy) 60%, transparent);
 }
 
 .price {
   font-size: 1.125rem;
-  font-weight: 700;
-  color: var(--color-hegra-yellow);
+  font-weight: 600;
+  color: var(--color-hegra-navy);
 }
+

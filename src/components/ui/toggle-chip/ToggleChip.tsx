@@ -16,7 +16,7 @@ export default function ToggleChip({ icon: Icon, label, isSelected, onClick }: T
       type="button"
       onClick={onClick}
       aria-pressed={isSelected}
-      className={`${styles.chip} ${isSelected ? styles.selected : ""}`}
+      className={`label-mono ${styles.chip} ${isSelected ? styles.selected : ""}`}
     >
       {Icon && <Icon size={14} />}
       {label}

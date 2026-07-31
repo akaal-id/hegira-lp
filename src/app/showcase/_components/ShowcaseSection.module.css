@@ -12,7 +12,8 @@
 }
 
 .index {
-  color: color-mix(in srgb, var(--color-hegra-navy) 40%, transparent);
+  color: var(--color-hegra-yellow);
+  font-weight: 700;
 }
 
 .dash {
@@ -20,12 +21,14 @@
 }
 
 .eyebrow {
-  color: var(--color-hegra-turquoise);
+  color: var(--color-hegra-navy);
+  font-size: 0.875rem;
+  letter-spacing: 0.08em;
 }
 
 .description {
   max-width: 42rem;
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.5rem;
   font-size: 0.9375rem;
   line-height: 1.6;
   color: color-mix(in srgb, var(--color-hegra-navy) 65%, transparent);
@@ -33,9 +36,10 @@
 
 .stage {
   padding: 2rem;
-  border-radius: 1rem;
-  background-color: color-mix(in srgb, var(--color-hegra-navy) 2.5%, transparent);
-  border: 1px solid color-mix(in srgb, var(--color-hegra-navy) 6%, transparent);
+  border-radius: 1.25rem;
+  border: 1px solid var(--hegra-glass-border);
+  position: relative;
+  overflow: hidden;
 }
 
 @media (max-width: 640px) {
@@ -43,3 +47,4 @@
     padding: 1.25rem;
   }
 }
+

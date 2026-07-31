@@ -30,7 +30,7 @@ export default function ConfirmationModal({
 
   return (
     <div className={styles.backdrop} role="dialog" aria-modal="true" aria-labelledby="confirmation-modal-title">
-      <div className={styles.panel}>
+      <div className={`glass-panel ${styles.panel}`}>
         <div className={styles.header}>
           <span className={`${styles.iconWrap} ${tone === "destructive" ? styles.destructive : styles.default}`}>
             <Icon size={22} />
@@ -44,13 +44,13 @@ export default function ConfirmationModal({
         </div>
 
         <div className={styles.actions}>
-          <button type="button" onClick={onClose} className={styles.cancel}>
+          <button type="button" onClick={onClose} className={`label-mono ${styles.cancel}`}>
             {cancelLabel}
           </button>
           <button
             type="button"
             onClick={onConfirm}
-            className={`${styles.confirm} ${tone === "destructive" ? styles.confirmDestructive : ""}`}
+            className={`label-mono ${styles.confirm} ${tone === "destructive" ? styles.confirmDestructive : ""}`}
           >
             {confirmLabel}
           </button>

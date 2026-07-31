@@ -19,7 +19,7 @@ export default function Loader({ size = "md", overlay = false, label, className 
       <span className={`${styles.spinner} ${sizeClass[size]} ${className}`} role="status">
         <span className="sr-only">Loading…</span>
       </span>
-      {label && <p className={styles.label}>{label}</p>}
+      {label && <p className={`label-mono ${styles.label}`}>{label}</p>}
     </div>
   );
 

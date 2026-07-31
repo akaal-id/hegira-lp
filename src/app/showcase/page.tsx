@@ -32,6 +32,8 @@ import CouponItemCard from "@/components/dashboard/coupon-item-card/CouponItemCa
 import DashboardFooter from "@/components/dashboard/footer/DashboardFooter";
 import AddTicketModal from "@/components/dashboard/modals/add-ticket-modal/AddTicketModal";
 
+import DashboardView from "./_components/DashboardView";
+
 import {
   articleCards,
   couponItems,
@@ -76,6 +78,7 @@ const orderSortOptions: DataTableSortOption<OrderRow>[] = [
 ];
 
 export default function ShowcasePage() {
+  const [viewMode, setViewMode] = useState<"components" | "dashboard">("components");
   const [selectedChip, setSelectedChip] = useState("b2c");
   const [activeSidebarId, setActiveSidebarId] = useState("dashboard");
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
@@ -91,14 +94,37 @@ export default function ShowcasePage() {
           organizer dashboard. Every component below runs on this site&apos;s own tokens and CSS Modules, ported
           and restyled from the production app.
         </p>
+
+        {/* Top-Level Mode Tabs */}
+        <div className={styles.topTabs}>
+          <button
+            type="button"
+            onClick={() => setViewMode("components")}
+            className={`label-mono ${styles.topTabBtn} ${viewMode === "components" ? styles.topTabBtnActive : ""}`}
+          >
+            Components Library (22)
+          </button>
+          <button
+            type="button"
+            onClick={() => setViewMode("dashboard")}
+            className={`label-mono ${styles.topTabBtn} ${viewMode === "dashboard" ? styles.topTabBtnActive : ""}`}
+          >
+            Full Dashboard Page
+          </button>
+        </div>
       </div>
 
-      <div className={styles.layout}>
-        <aside className={styles.sidebar}>
-          <ShowcaseNav />
-        </aside>
+      {viewMode === "dashboard" ? (
+        <div className={styles.dashboardContainer}>
+          <DashboardView />
+        </div>
+      ) : (
+        <div className={styles.layout}>
+          <aside className={styles.sidebar}>
+            <ShowcaseNav />
+          </aside>
 
-        <div className={styles.content}>
+          <div className={styles.content}>
           <p className={`label-mono ${styles.categoryLabel}`}>01 — Core UI &amp; marketing</p>
 
           <ShowcaseSection id="logo" index="01" title="Logo">
@@ -283,6 +309,7 @@ export default function ShowcasePage() {
           </ShowcaseSection>
         </div>
       </div>
+      )}
     </div>
   );
 }

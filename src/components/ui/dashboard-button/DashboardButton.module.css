@@ -1,0 +1,141 @@
+/* =========================================================
+   DashboardButton — styled to match the Hegira Button component
+   (inset glow · 0.4rem radius · label-mono)
+   Variants: primary | secondary | danger | ghost | filter
+   ========================================================= */
+
+/* ── Base ──────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: none;
+  border-radius: 0.4rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    box-shadow 0.3s ease,
+    background-color 0.25s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Sizes ─────────────────────────────────────────────── */
+.sm {
+  padding: 0.4375rem 0.875rem;
+}
+
+.md {
+  padding: 0.625rem 1.25rem;
+}
+
+.lg {
+  padding: 0.8125rem 1.625rem;
+  font-size: 0.8125rem;
+}
+
+/* ── Full width ────────────────────────────────────────── */
+.fill {
+  width: 100%;
+}
+
+/* ── Variant: primary (turquoise — inset glow) ──── */
+.primary {
+  background-color: var(--color-hegra-turquoise);
+  color: #ffffff;
+  box-shadow: inset 0 6px 10px rgba(255, 255, 255, 0.2);
+}
+
+.primary:hover {
+  box-shadow: inset 0 -10px 10px rgba(255, 255, 255, 0.15);
+}
+
+.primary:active {
+  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* ── Variant: secondary (outlined) ─────── */
+.secondary {
+  background-color: transparent;
+  color: var(--color-hegra-navy);
+  border: 1px solid color-mix(in srgb, var(--color-hegra-navy) 25%, transparent);
+  box-shadow: none;
+}
+
+.secondary:hover {
+  border-color: var(--color-hegra-turquoise);
+  color: var(--color-hegra-turquoise);
+}
+
+/* ── Variant: danger (red — inset pattern) ────────── */
+.danger {
+  background-color: #fef2f2;
+  color: #c94f4f;
+  border: 1px solid color-mix(in srgb, #c94f4f 25%, transparent);
+  box-shadow: inset 0 4px 8px rgba(255, 255, 255, 0.5);
+}
+
+.danger:hover {
+  box-shadow: inset 0 -8px 10px rgba(255, 255, 255, 0.4);
+}
+
+/* ── Variant: ghost (underline — matches Button.ghost) ─── */
+.ghost {
+  background: transparent;
+  color: var(--color-hegra-navy);
+  padding: 0;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-hegra-navy) 25%, transparent);
+  padding-bottom: 2px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+}
+
+.ghost:hover {
+  border-color: var(--color-hegra-turquoise);
+  color: var(--color-hegra-turquoise);
+}
+
+/* ── Variant: filter (chip toggle) ────────────────────── */
+.filter {
+  background-color: rgba(24, 9, 59, 0.06);
+  color: color-mix(in srgb, var(--color-hegra-navy) 65%, transparent);
+  border: 1px solid transparent;
+  box-shadow: none;
+}
+
+.filter:hover {
+  background-color: rgba(24, 9, 59, 0.1);
+  color: var(--color-hegra-navy);
+}
+
+.filterActive {
+  background-color: var(--color-hegra-navy);
+  color: #ffffff;
+  box-shadow: inset 0 4px 8px rgba(255, 255, 255, 0.1);
+}
+
+.filterActive:hover {
+  box-shadow: inset 0 -6px 8px rgba(255, 255, 255, 0.1);
+}
+
+/* ── Icon ──────────────────────────────────────────────── */
+.icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+}

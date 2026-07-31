@@ -12,15 +12,24 @@ interface BreadcrumbsProps {
 export default function Breadcrumbs({ segments }: BreadcrumbsProps) {
   return (
     <nav aria-label="Breadcrumb" className={styles.nav}>
-      <ol className={styles.list}>
+      <ol className={`label-mono ${styles.list}`}>
         {segments.map((segment, index) => {
           const isCurrent = index === segments.length - 1;
           return (
             <li key={segment.label} className={styles.item}>
               {index > 0 && (
-                <span className={styles.separator} aria-hidden="true">
-                  /
-                </span>
+                <svg
+                  aria-hidden="true"
+                  className={styles.chevron}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="m9 18 6-6-6-6" />
+                </svg>
               )}
               {isCurrent || !segment.href ? (
                 <span className={styles.current} aria-current={isCurrent ? "page" : undefined}>
@@ -38,3 +47,4 @@ export default function Breadcrumbs({ segments }: BreadcrumbsProps) {
     </nav>
   );
 }
+

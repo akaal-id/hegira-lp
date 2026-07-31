@@ -41,7 +41,7 @@ export default function RadialProgress({
           cy={size / 2}
         />
       </svg>
-      <span className={styles.value} style={{ fontSize: Math.max(9, size / 4.5) }}>
+      <span className={`label-mono ${styles.value}`} style={{ fontSize: Math.max(9, size / 4.5) }}>
         {Math.round(clamped)}%
       </span>
     </div>

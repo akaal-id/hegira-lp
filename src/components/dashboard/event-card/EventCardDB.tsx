@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, CalendarDays, Clock, Eye, MapPin } from "lucide-react";
+import { ArrowRight, Clock, Eye, MapPin } from "lucide-react";
 import StatusBadge, { type StatusTone } from "@/components/ui/status-badge/StatusBadge";
 import styles from "./EventCardDB.module.css";
 
@@ -22,7 +22,7 @@ interface EventCardDBProps {
 
 export default function EventCardDB({ event, onView }: EventCardDBProps) {
   return (
-    <article className={styles.card}>
+    <article className={`glass-panel ${styles.card}`}>
       <div className={styles.imageWrap}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={event.coverImageUrl} alt="" className={styles.image} />
@@ -36,23 +36,21 @@ export default function EventCardDB({ event, onView }: EventCardDBProps) {
           <StatusBadge label={event.status} tone={event.statusTone} />
         </div>
 
-        <div className={styles.meta}>
+        <div className={`label-mono ${styles.meta}`}>
           <span className={styles.metaRow}>
-            <CalendarDays size={14} /> {event.date}
+            <Clock size={13} /> {event.date} | {event.time}
           </span>
           <span className={styles.metaRow}>
-            <Clock size={14} /> {event.time}
-          </span>
-          <span className={styles.metaRow}>
-            <MapPin size={14} /> {event.address}
+            <MapPin size={13} /> {event.address}
           </span>
         </div>
 
-        <button type="button" onClick={onView} className={styles.viewButton}>
-          <Eye size={15} /> View event
-          <ArrowRight size={14} className={styles.viewArrow} />
+        <button type="button" onClick={onView} className={`label-mono ${styles.viewButton}`}>
+          <Eye size={14} /> View event
+          <ArrowRight size={13} className={styles.viewArrow} />
         </button>
       </div>
     </article>
   );
+
 }

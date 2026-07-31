@@ -1,0 +1,118 @@
+/* =========================================================
+   Dashboard Home Event List Module CSS
+   ========================================================= */
+
+.container {
+  background: #ffffff;
+  padding-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .toolbar {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.searchWrapper {
+  position: relative;
+  flex: 1;
+  width: 100%;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 0.875rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.5rem 1rem 0.5rem 2.5rem;
+  font-size: 0.875rem;
+  border-radius: 0.4rem;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  color: var(--color-hegra-navy);
+  outline: none;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.searchInput:focus {
+  border-color: var(--color-hegra-turquoise);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-hegra-turquoise) 20%, transparent);
+}
+
+.actionsGroup {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  justify-content: space-between;
+}
+
+@media (min-width: 1024px) {
+  .actionsGroup {
+    width: auto;
+    justify-content: flex-end;
+  }
+}
+
+.filterGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  overflow-x: auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.emptyState {
+  padding: 3rem;
+  text-align: center;
+  border-radius: 0.4rem;
+  background: #ffffff;
+  border: 1px solid #f3f4f6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.emptyText {
+  color: #6b7280;
+  font-weight: 500;
+  font-size: 0.875rem;
+  margin: 0;
+}

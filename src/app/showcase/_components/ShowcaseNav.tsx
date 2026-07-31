@@ -42,14 +42,14 @@ const GROUPS: NavGroup[] = [
 
 export default function ShowcaseNav() {
   return (
-    <nav aria-label="Component index" className={styles.nav}>
+    <nav aria-label="Component index" className={`glass-panel ${styles.nav}`}>
       {GROUPS.map((group) => (
         <div key={group.title} className={styles.group}>
           <p className={`label-mono ${styles.groupTitle}`}>{group.title}</p>
           <ul className={styles.list}>
             {group.items.map((item) => (
               <li key={item.id}>
-                <a href={`#${item.id}`} className={styles.link}>
+                <a href={`#${item.id}`} className={`label-mono ${styles.link}`}>
                   {item.label}
                 </a>
               </li>

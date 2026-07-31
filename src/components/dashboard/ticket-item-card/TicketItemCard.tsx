@@ -28,7 +28,7 @@ export default function TicketItemCard({ ticket }: TicketItemCardProps) {
 
   return (
     <>
-      <div className={styles.card}>
+      <div className={`glass-panel ${styles.card}`}>
         <div className={styles.body}>
           <div className={styles.headRow}>
             <div className={styles.titleWrap}>
@@ -37,7 +37,7 @@ export default function TicketItemCard({ ticket }: TicketItemCardProps) {
             </div>
             <div className={styles.actions}>
               <button type="button" aria-label={`Edit ${ticket.name}`} className={styles.actionEdit}>
-                <Edit3 size={16} />
+                <Edit3 size={15} />
               </button>
               <button
                 type="button"
@@ -45,24 +45,24 @@ export default function TicketItemCard({ ticket }: TicketItemCardProps) {
                 onClick={() => setIsDeleteOpen(true)}
                 className={styles.actionDelete}
               >
-                <Trash2 size={16} />
+                <Trash2 size={15} />
               </button>
             </div>
           </div>
 
-          <p className={styles.eventName}>{ticket.eventName}</p>
+          <p className={`label-mono ${styles.eventName}`}>{ticket.eventName}</p>
 
           <dl className={styles.stats}>
             <div className={styles.statRow}>
-              <dt>Sold</dt>
-              <dd>{ticket.sold}</dd>
+              <dt className="label-mono">Sold</dt>
+              <dd className="label-mono">{ticket.sold}</dd>
             </div>
             <div className={styles.statRow}>
-              <dt>Quantity</dt>
-              <dd>{ticket.maxQuantity}</dd>
+              <dt className="label-mono">Quantity</dt>
+              <dd className="label-mono">{ticket.maxQuantity}</dd>
             </div>
             <div className={styles.statRow}>
-              <dt>Availability</dt>
+              <dt className="label-mono">Status</dt>
               <dd>
                 <StatusBadge label={ticket.availability.label} tone={ticket.availability.tone} />
               </dd>
@@ -70,7 +70,7 @@ export default function TicketItemCard({ ticket }: TicketItemCardProps) {
           </dl>
         </div>
 
-        <div className={styles.footer}>
+        <div className={`label-mono ${styles.footer}`}>
           <span>Price</span>
           <span className={styles.price}>{formatCurrency(ticket.price)}</span>
         </div>

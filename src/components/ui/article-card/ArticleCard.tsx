@@ -23,7 +23,7 @@ export default function ArticleCard({
   onSelect,
 }: ArticleCardProps) {
   return (
-    <article className={styles.card}>
+    <article className={`glass-panel ${styles.card}`}>
       <div className={styles.imageWrap}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={imageUrl} alt="" className={styles.image} />
@@ -36,7 +36,7 @@ export default function ArticleCard({
         </h3>
         <p className={styles.excerpt}>{excerpt}</p>
 
-        <div className={styles.meta}>
+        <div className={`label-mono ${styles.meta}`}>
           <span className={styles.metaRow}>
             <User size={13} /> {author}
           </span>
@@ -45,11 +45,12 @@ export default function ArticleCard({
           </span>
         </div>
 
-        <button type="button" onClick={onSelect} className={styles.readMore}>
-          Read more
-          <ArrowRight size={15} className={styles.readMoreArrow} />
+        <button type="button" onClick={onSelect} className={`label-mono ${styles.readMore}`}>
+          Read article
+          <ArrowRight size={14} className={styles.readMoreArrow} />
         </button>
       </div>
     </article>
   );
+
 }

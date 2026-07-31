@@ -30,10 +30,10 @@ export default function Toast({ items, onDismiss }: ToastProps) {
       {items.map((item) => {
         const Icon = ICONS[item.type];
         return (
-          <div key={item.id} className={`${styles.toast} ${styles[item.type]}`}>
+          <div key={item.id} className={`glass-panel ${styles.toast} ${styles[item.type]}`}>
             <Icon size={18} className={styles.icon} />
             <div className={styles.body}>
-              <p className={styles.title}>{item.title}</p>
+              <p className={`label-mono ${styles.title}`}>{item.title}</p>
               <p className={styles.message}>{item.message}</p>
             </div>
             <button

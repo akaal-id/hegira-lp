@@ -195,17 +195,8 @@ h4 {
 }
 
 .glass-panel {
-  background: linear-gradient(
-    145deg,
-    var(--hegra-card-gradient-start) 0%,
-    var(--hegra-card-gradient-mid) 55%,
-    var(--hegra-card-gradient-end) 100%
-  );
-  border: 1px solid var(--hegra-glass-border);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: var(--hegra-shadow-inset), var(--hegra-shadow-elevated);
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  background: #ffffff;
+  border: 1px solid rgba(24, 9, 59, 0.08);
 }
 
 .bg-grid {

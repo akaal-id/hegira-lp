@@ -38,12 +38,12 @@ export default function UserMenu({ userName }: UserMenuProps) {
       </button>
 
       {isOpen && (
-        <div role="menu" className={styles.menu}>
-          <button type="button" role="menuitem" className={styles.item}>
-            <LayoutDashboard size={16} /> Home
+        <div role="menu" className={`glass-panel ${styles.menu}`}>
+          <button type="button" role="menuitem" className={`label-mono ${styles.item}`}>
+            <LayoutDashboard size={15} /> Dashboard Home
           </button>
-          <button type="button" role="menuitem" className={`${styles.item} ${styles.itemDanger}`}>
-            <LogOut size={16} /> Logout
+          <button type="button" role="menuitem" className={`label-mono ${styles.item} ${styles.itemDanger}`}>
+            <LogOut size={15} /> Logout
           </button>
         </div>
       )}

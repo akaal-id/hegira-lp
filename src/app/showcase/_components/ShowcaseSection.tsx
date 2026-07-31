@@ -18,7 +18,7 @@ export default function ShowcaseSection({ id, index, title, description, childre
         <span className={styles.eyebrow}>{title}</span>
       </div>
       {description && <p className={styles.description}>{description}</p>}
-      <div className={styles.stage}>{children}</div>
+      <div className={`glass-panel ${styles.stage}`}>{children}</div>
     </section>
   );
 }
