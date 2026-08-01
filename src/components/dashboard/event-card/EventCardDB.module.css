@@ -61,6 +61,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.375rem;
+  font-family: var(--font-sans), sans-serif;
   font-size: 0.6875rem;
   color: color-mix(in srgb, var(--color-hegra-navy) 60%, transparent);
   margin-bottom: 1rem;
@@ -72,20 +73,26 @@
   gap: 0.375rem;
 }
 
+.footerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 0.75rem;
+  border-top: 1px solid color-mix(in srgb, var(--color-hegra-navy) 8%, transparent);
+}
+
 .viewButton {
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;
-  margin-top: auto;
-  padding-top: 0.75rem;
-  border-top: 1px solid color-mix(in srgb, var(--color-hegra-navy) 8%, transparent);
   font-size: 0.75rem;
   font-weight: 600;
   color: var(--color-hegra-turquoise);
   background: transparent;
-  border-left: none;
-  border-right: none;
-  border-bottom: none;
+  border: none;
+  padding: 0;
   cursor: pointer;
   transition: color 0.2s ease;
 }
@@ -100,5 +107,26 @@
 
 .viewButton:hover .viewArrow {
   transform: translateX(3px);
+}
+
+.editButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 1.875rem;
+  height: 1.875rem;
+  border-radius: 0.35rem;
+  color: color-mix(in srgb, var(--color-hegra-navy) 60%, transparent);
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--color-hegra-navy) 14%, transparent);
+  cursor: pointer;
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.editButton:hover {
+  color: var(--color-hegra-turquoise);
+  border-color: color-mix(in srgb, var(--color-hegra-turquoise) 40%, transparent);
+  background-color: color-mix(in srgb, var(--color-hegra-turquoise) 8%, transparent);
 }
 

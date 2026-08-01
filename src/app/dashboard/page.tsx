@@ -142,6 +142,7 @@ export default function DashboardHomePage() {
                   address: evt.location,
                 }}
                 onView={() => router.push(`/dashboard/events/${evt.id}`)}
+                onEdit={() => router.push(`/dashboard/events/${evt.id}/edit`)}
               />
             ))}
           </div>

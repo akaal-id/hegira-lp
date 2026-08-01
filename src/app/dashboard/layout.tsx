@@ -6,8 +6,7 @@ import {
   Briefcase,
   CheckCheck,
   ClipboardList,
-  DollarSign,
-  FileText,
+  LayoutDashboard,
   PlusCircle,
   ShoppingCart,
   Tag,
@@ -74,13 +73,12 @@ export default function DashboardLayout({
           {
             title: "Event Operations",
             items: [
-              { id: `/dashboard/events/${activeEventId}`, label: "Event Details", icon: FileText, href: `/dashboard/events/${activeEventId}` },
+              { id: `/dashboard/events/${activeEventId}`, label: "Event Overview", icon: LayoutDashboard, href: `/dashboard/events/${activeEventId}` },
               { id: "/dashboard/tickets", label: "Tickets", icon: Ticket, href: "/dashboard/tickets" },
               { id: "/dashboard/coupons", label: "Coupons", icon: Tag, href: "/dashboard/coupons" },
               { id: "/dashboard/orders", label: "Orders", icon: ShoppingCart, href: "/dashboard/orders" },
               { id: "/dashboard/visitors", label: "Visitors", icon: Users, href: "/dashboard/visitors" },
               { id: "/dashboard/crew", label: "Crew", icon: CheckCheck, href: "/dashboard/crew" },
-              { id: "/dashboard/revenue", label: "Revenue", icon: DollarSign, href: "/dashboard/revenue" },
             ],
           } satisfies SidebarSection,
         ]
@@ -100,7 +98,7 @@ export default function DashboardLayout({
     if (pathname === "/dashboard/events/create") {
       segments.push({ label: "Create Event", href: "/dashboard/events/create" });
     } else if (pathname.startsWith("/dashboard/events/")) {
-      segments.push({ label: "Event Details", href: pathname });
+      segments.push({ label: "Event Overview", href: pathname });
     } else if (pathname === "/dashboard/tickets") {
       segments.push({ label: "Tickets", href: "/dashboard/tickets" });
     } else if (pathname === "/dashboard/coupons") {
@@ -111,8 +109,6 @@ export default function DashboardLayout({
       segments.push({ label: "Visitors", href: "/dashboard/visitors" });
     } else if (pathname === "/dashboard/crew") {
       segments.push({ label: "Crew", href: "/dashboard/crew" });
-    } else if (pathname === "/dashboard/revenue") {
-      segments.push({ label: "Revenue", href: "/dashboard/revenue" });
     } else if (pathname === "/dashboard/account") {
       segments.push({ label: "Account Info", href: "/dashboard/account" });
     }

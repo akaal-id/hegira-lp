@@ -117,7 +117,7 @@ export const initialDashboardEvents: DashboardEvent[] = [
     totalQuota: 2500,
     ticketsSold: 1840,
     revenue: 460000000,
-    description: "Enjoy performances by renowned national and international artists while witnessing a spectacular sunset by the Ancol beach.",
+    description: "<p>Enjoy performances by renowned national and international artists while witnessing a spectacular sunset by the Ancol beach. <strong>Sunset Music Fest 2026</strong> brings together three stages of live music, a curated food festival, and a beachfront market, all set against Jakarta Bay's golden hour.</p><p>This year's lineup spans indie, electronic, and contemporary pop acts, headlined by a rotating cast of chart-topping performers across both event days. Between sets, catch acoustic showcases at the Boardwalk Stage or unwind at the VIP Lounge with a curated cocktail menu.</p><p><strong>Festival highlights:</strong></p><ul><li>Three live stages running from afternoon through midnight</li><li>40+ local and international artists across two days</li><li>A beachfront food festival featuring 30+ culinary vendors</li><li>VIP Front Stage Lounge with air-conditioned seating and free-flow snacks</li><li>Sunset photo points and interactive art installations along the boardwalk</li></ul><p>Gates open at 4:00 PM WIB each day. Entry is ticketed by category, so check the ticket tiers for pricing and availability. On-site parking is available and the venue is fully accessible.</p>",
     termsAndConditions: "1. E-tickets must be exchanged for a wristband on event day.\n2. Sharp objects, illegal substances, and outside food are prohibited.\n3. Purchased tickets are non-refundable and non-transferable.",
   },
   {

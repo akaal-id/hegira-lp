@@ -97,12 +97,6 @@
   }
 }
 
-@media (min-width: 1024px) {
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
 .emptyState {
   padding: 3rem;
   text-align: center;

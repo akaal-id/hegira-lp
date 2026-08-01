@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Clock, Eye, MapPin } from "lucide-react";
+import { ArrowRight, Clock, Eye, MapPin, Pencil } from "lucide-react";
 import StatusBadge, { type StatusTone } from "@/components/ui/status-badge/StatusBadge";
 import styles from "./EventCardDB.module.css";
 
@@ -18,9 +18,10 @@ export interface EventCardDBData {
 interface EventCardDBProps {
   event: EventCardDBData;
   onView?: () => void;
+  onEdit?: () => void;
 }
 
-export default function EventCardDB({ event, onView }: EventCardDBProps) {
+export default function EventCardDB({ event, onView, onEdit }: EventCardDBProps) {
   return (
     <article className={`glass-panel ${styles.card}`}>
       <div className={styles.imageWrap}>
@@ -36,7 +37,7 @@ export default function EventCardDB({ event, onView }: EventCardDBProps) {
           <StatusBadge label={event.status} tone={event.statusTone} />
         </div>
 
-        <div className={`label-mono ${styles.meta}`}>
+        <div className={styles.meta}>
           <span className={styles.metaRow}>
             <Clock size={13} /> {event.date} | {event.time}
           </span>
@@ -45,10 +46,15 @@ export default function EventCardDB({ event, onView }: EventCardDBProps) {
           </span>
         </div>
 
-        <button type="button" onClick={onView} className={`label-mono ${styles.viewButton}`}>
-          <Eye size={14} /> View event
-          <ArrowRight size={13} className={styles.viewArrow} />
-        </button>
+        <div className={styles.footerRow}>
+          <button type="button" onClick={onView} className={`label-mono ${styles.viewButton}`}>
+            <Eye size={14} /> View event
+            <ArrowRight size={13} className={styles.viewArrow} />
+          </button>
+          <button type="button" onClick={onEdit} aria-label="Edit event" className={styles.editButton}>
+            <Pencil size={14} />
+          </button>
+        </div>
       </div>
     </article>
   );
