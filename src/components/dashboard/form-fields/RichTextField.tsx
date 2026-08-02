@@ -12,6 +12,8 @@ interface RichTextFieldProps {
   minHeight?: string;
   actions?: ReactNode;
   className?: string;
+  /** Stretch to fill the height of its flex/grid container instead of sizing to minHeight. */
+  fill?: boolean;
 }
 
 export default function RichTextField({
@@ -22,6 +24,7 @@ export default function RichTextField({
   minHeight = "8rem",
   actions,
   className,
+  fill = false,
 }: RichTextFieldProps) {
   const editableRef = useRef<HTMLDivElement>(null);
   const [isFocused, setIsFocused] = useState(false);
@@ -33,13 +36,17 @@ export default function RichTextField({
   };
 
   return (
-    <div className={`${styles.fieldGroup} ${className || ""}`}>
+    <div className={`${styles.fieldGroup} ${fill ? styles.fieldGroupFill : ""} ${className || ""}`}>
       <div className={styles.labelRow}>
         <label className={styles.label}>{label}</label>
         {actions}
       </div>
 
-      <div className={`${styles.richTextShell} ${isFocused ? styles.richTextShellFocused : ""}`}>
+      <div
+        className={`${styles.richTextShell} ${isFocused ? styles.richTextShellFocused : ""} ${
+          fill ? styles.richTextShellFill : ""
+        }`}
+      >
         <div className={styles.richTextToolbar}>
           <button type="button" className={styles.richToolBtn} onMouseDown={(e) => e.preventDefault()} onClick={() => exec("bold")} aria-label="Bold">
             <Bold size={14} />
@@ -61,8 +68,8 @@ export default function RichTextField({
           contentEditable
           suppressContentEditableWarning
           data-placeholder={placeholder}
-          className={styles.richTextEditable}
-          style={{ minHeight }}
+          className={`${styles.richTextEditable} ${fill ? styles.richTextEditableFill : ""}`}
+          style={fill ? undefined : { minHeight }}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           onInput={(e) => onChange(e.currentTarget.innerHTML)}

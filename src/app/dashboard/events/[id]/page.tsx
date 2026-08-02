@@ -32,14 +32,6 @@ type OverviewTab = "tickets" | "coupons" | "orders" | "visitors";
 const formatCurrency = (amount: number) =>
   `Rp ${amount.toLocaleString("id-ID")}`;
 
-const getInitials = (name: string) =>
-  name
-    .split(" ")
-    .map((part) => part[0])
-    .slice(0, 2)
-    .join("")
-    .toUpperCase();
-
 export default function EventDetailPage({
   params,
 }: {
@@ -200,33 +192,33 @@ export default function EventDetailPage({
 
             {overviewTab === "tickets" && (
               eventTicketTiers.length > 0 ? (
-                <div className={styles.overviewList}>
+                <div className={styles.overviewCardGrid}>
                   {eventTicketTiers.slice(0, 4).map((tier) => {
                     const tierPct = tier.quota > 0 ? Math.round((tier.sold / tier.quota) * 100) : 0;
                     return (
                       <button
                         key={tier.id}
                         type="button"
-                        className={styles.overviewRow}
+                        className={styles.overviewCard}
                         onClick={() => router.push("/dashboard/tickets")}
                       >
-                        <span className={styles.overviewRowIcon}>
-                          <Ticket size={15} />
-                        </span>
-                        <span className={styles.overviewRowMain}>
-                          <span className={styles.overviewRowTitle}>{tier.name}</span>
-                          <span className={styles.overviewRowMeta}>
-                            {tier.sold.toLocaleString("id-ID")} / {tier.quota.toLocaleString("id-ID")} sold
+                        <div className={styles.overviewCardHead}>
+                          <span className={styles.overviewRowIcon}>
+                            <Ticket size={15} />
                           </span>
-                          <span className={styles.overviewRowMeter}>
-                            <span className={styles.overviewRowMeterFill} style={{ width: `${tierPct}%` }} />
-                          </span>
-                        </span>
-                        <span className={styles.overviewRowEnd}>
-                          <span className={styles.overviewRowValue}>{formatCurrency(tier.price)}</span>
+                          <span className={styles.overviewCardTitle}>{tier.name}</span>
                           <StatusBadge label={tier.status} tone={getTierTone(tier.status)} />
-                          <ChevronRight size={14} className={styles.overviewRowChevron} />
+                        </div>
+                        <p className={styles.overviewCardMeta}>
+                          {tier.sold.toLocaleString("id-ID")} / {tier.quota.toLocaleString("id-ID")} sold
+                        </p>
+                        <span className={styles.overviewRowMeter}>
+                          <span className={styles.overviewRowMeterFill} style={{ width: `${tierPct}%` }} />
                         </span>
+                        <div className={styles.overviewCardFooter}>
+                          <span className={styles.overviewCardValue}>{formatCurrency(tier.price)}</span>
+                          <ChevronRight size={14} className={styles.overviewCardChevron} />
+                        </div>
                       </button>
                     );
                   })}
@@ -238,37 +230,37 @@ export default function EventDetailPage({
 
             {overviewTab === "coupons" && (
               eventCoupons.length > 0 ? (
-                <div className={styles.overviewList}>
+                <div className={styles.overviewCardGrid}>
                   {eventCoupons.slice(0, 4).map((coupon) => {
                     const couponPct = coupon.quota > 0 ? Math.round((coupon.used / coupon.quota) * 100) : 0;
                     return (
                       <button
                         key={coupon.id}
                         type="button"
-                        className={styles.overviewRow}
+                        className={styles.overviewCard}
                         onClick={() => router.push("/dashboard/coupons")}
                       >
-                        <span className={styles.overviewRowIcon}>
-                          <Tag size={15} />
-                        </span>
-                        <span className={styles.overviewRowMain}>
-                          <span className={styles.overviewRowTitle}>{coupon.code}</span>
-                          <span className={styles.overviewRowMeta}>
-                            {coupon.used.toLocaleString("id-ID")} / {coupon.quota.toLocaleString("id-ID")} used
+                        <div className={styles.overviewCardHead}>
+                          <span className={styles.overviewRowIcon}>
+                            <Tag size={15} />
                           </span>
-                          <span className={styles.overviewRowMeter}>
-                            <span className={styles.overviewRowMeterFill} style={{ width: `${couponPct}%` }} />
-                          </span>
+                          <span className={styles.overviewCardTitle}>{coupon.code}</span>
+                          <StatusBadge label={coupon.status} tone={getCouponTone(coupon.status)} />
+                        </div>
+                        <p className={styles.overviewCardMeta}>
+                          {coupon.used.toLocaleString("id-ID")} / {coupon.quota.toLocaleString("id-ID")} used
+                        </p>
+                        <span className={styles.overviewRowMeter}>
+                          <span className={styles.overviewRowMeterFill} style={{ width: `${couponPct}%` }} />
                         </span>
-                        <span className={styles.overviewRowEnd}>
-                          <span className={styles.overviewRowValue}>
+                        <div className={styles.overviewCardFooter}>
+                          <span className={styles.overviewCardValue}>
                             {coupon.discountType === "percentage"
                               ? `${coupon.discountValue}% off`
                               : `${formatCurrency(coupon.discountValue)} off`}
                           </span>
-                          <StatusBadge label={coupon.status} tone={getCouponTone(coupon.status)} />
-                          <ChevronRight size={14} className={styles.overviewRowChevron} />
-                        </span>
+                          <ChevronRight size={14} className={styles.overviewCardChevron} />
+                        </div>
                       </button>
                     );
                   })}
@@ -280,28 +272,44 @@ export default function EventDetailPage({
 
             {overviewTab === "orders" && (
               eventOrders.length > 0 ? (
-                <div className={styles.overviewList}>
-                  {eventOrders.slice(0, 4).map((order) => (
-                    <button
-                      key={order.id}
-                      type="button"
-                      className={styles.overviewRow}
-                      onClick={() => router.push("/dashboard/orders")}
-                    >
-                      <span className={styles.overviewRowIcon}>
-                        <ShoppingCart size={15} />
-                      </span>
-                      <span className={styles.overviewRowMain}>
-                        <span className={styles.overviewRowTitle}>{order.buyerName}</span>
-                        <span className={styles.overviewRowMeta}>{order.orderNumber}</span>
-                      </span>
-                      <span className={styles.overviewRowEnd}>
-                        <span className={styles.overviewRowValue}>{formatCurrency(order.totalPrice)}</span>
-                        <StatusBadge label={order.status} tone={getOrderTone(order.status)} />
-                        <ChevronRight size={14} className={styles.overviewRowChevron} />
-                      </span>
-                    </button>
-                  ))}
+                <div className={styles.overviewTableWrap}>
+                  <table className={styles.overviewTable}>
+                    <thead>
+                      <tr>
+                        <th className={styles.overviewTableHeadCell}>Buyer</th>
+                        <th className={styles.overviewTableHeadCell}>Ticket</th>
+                        <th className={`${styles.overviewTableHeadCell} ${styles.overviewTableCellEnd}`}>Amount</th>
+                        <th className={styles.overviewTableHeadCell}>Status</th>
+                        <th className={styles.overviewTableHeadCell} aria-hidden="true" />
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {eventOrders.slice(0, 5).map((order) => (
+                        <tr
+                          key={order.id}
+                          className={styles.overviewTableRow}
+                          onClick={() => router.push("/dashboard/orders")}
+                        >
+                          <td className={styles.overviewTableCell}>
+                            <div className={styles.overviewTableCellMain}>
+                              <span>{order.buyerName}</span>
+                              <span className={styles.overviewTableCellSub}>{order.orderNumber}</span>
+                            </div>
+                          </td>
+                          <td className={styles.overviewTableCell}>{order.ticketName}</td>
+                          <td className={`${styles.overviewTableCell} ${styles.overviewTableCellEnd}`}>
+                            {formatCurrency(order.totalPrice)}
+                          </td>
+                          <td className={styles.overviewTableCell}>
+                            <StatusBadge label={order.status} tone={getOrderTone(order.status)} />
+                          </td>
+                          <td className={`${styles.overviewTableCell} ${styles.overviewTableCellEnd}`}>
+                            <ChevronRight size={14} className={styles.overviewCardChevron} />
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               ) : (
                 <p className={styles.overviewEmpty}>No orders yet.</p>
@@ -310,28 +318,43 @@ export default function EventDetailPage({
 
             {overviewTab === "visitors" && (
               eventVisitors.length > 0 ? (
-                <div className={styles.overviewList}>
-                  {eventVisitors.slice(0, 4).map((visitor) => (
-                    <button
-                      key={visitor.id}
-                      type="button"
-                      className={styles.overviewRow}
-                      onClick={() => router.push("/dashboard/visitors")}
-                    >
-                      <span className={styles.overviewRowAvatar}>{getInitials(visitor.visitorName)}</span>
-                      <span className={styles.overviewRowMain}>
-                        <span className={styles.overviewRowTitle}>{visitor.visitorName}</span>
-                        <span className={styles.overviewRowMeta}>{visitor.ticketCategory}</span>
-                      </span>
-                      <span className={styles.overviewRowEnd}>
-                        <StatusBadge
-                          label={visitor.isCheckedIn ? "Checked In" : "Not Checked In"}
-                          tone={visitor.isCheckedIn ? "positive" : "neutral"}
-                        />
-                        <ChevronRight size={14} className={styles.overviewRowChevron} />
-                      </span>
-                    </button>
-                  ))}
+                <div className={styles.overviewTableWrap}>
+                  <table className={styles.overviewTable}>
+                    <thead>
+                      <tr>
+                        <th className={styles.overviewTableHeadCell}>Visitor</th>
+                        <th className={styles.overviewTableHeadCell}>Ticket Category</th>
+                        <th className={styles.overviewTableHeadCell}>Status</th>
+                        <th className={styles.overviewTableHeadCell} aria-hidden="true" />
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {eventVisitors.slice(0, 5).map((visitor) => (
+                        <tr
+                          key={visitor.id}
+                          className={styles.overviewTableRow}
+                          onClick={() => router.push("/dashboard/visitors")}
+                        >
+                          <td className={styles.overviewTableCell}>
+                            <div className={styles.overviewTableCellMain}>
+                              <span>{visitor.visitorName}</span>
+                              <span className={styles.overviewTableCellSub}>{visitor.ticketCode}</span>
+                            </div>
+                          </td>
+                          <td className={styles.overviewTableCell}>{visitor.ticketCategory}</td>
+                          <td className={styles.overviewTableCell}>
+                            <StatusBadge
+                              label={visitor.isCheckedIn ? "Checked In" : "Not Checked In"}
+                              tone={visitor.isCheckedIn ? "positive" : "neutral"}
+                            />
+                          </td>
+                          <td className={`${styles.overviewTableCell} ${styles.overviewTableCellEnd}`}>
+                            <ChevronRight size={14} className={styles.overviewCardChevron} />
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               ) : (
                 <p className={styles.overviewEmpty}>No visitors registered yet.</p>

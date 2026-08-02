@@ -402,6 +402,154 @@
   color: var(--color-hegra-navy);
 }
 
+/* ── Overview cards (Tickets / Coupons) ─────────────────────────── */
+.overviewCardGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .overviewCardGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.overviewCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #f3f4f6;
+  border-radius: 0.5rem;
+  background: #ffffff;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.overviewCard:hover {
+  border-color: color-mix(in srgb, var(--color-hegra-turquoise) 35%, transparent);
+  box-shadow: 0 2px 10px rgba(24, 9, 59, 0.06);
+}
+
+.overviewCard:hover .overviewCardChevron {
+  transform: translateX(2px);
+  color: var(--color-hegra-turquoise);
+}
+
+.overviewCardHead {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.overviewCardTitle {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-hegra-navy);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.overviewCardMeta {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin-top: -0.375rem;
+}
+
+.overviewCardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.overviewCardValue {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-hegra-navy);
+}
+
+.overviewCardChevron {
+  color: #d1d5db;
+  flex-shrink: 0;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+/* ── Overview table (Orders / Visitors) ─────────────────────────── */
+.overviewTableWrap {
+  border: 1px solid #f3f4f6;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.overviewTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.overviewTableHeadCell {
+  padding: 0.625rem 0.875rem;
+  text-align: left;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #9ca3af;
+  background: #fafafa;
+  border-bottom: 1px solid #f3f4f6;
+  white-space: nowrap;
+}
+
+.overviewTableRow {
+  cursor: pointer;
+  border-top: 1px solid #f3f4f6;
+  transition: background-color 0.15s ease;
+}
+
+.overviewTableRow:first-child {
+  border-top: none;
+}
+
+.overviewTableRow:hover {
+  background-color: color-mix(in srgb, var(--color-hegra-turquoise) 4%, transparent);
+}
+
+.overviewTableRow:hover .overviewCardChevron {
+  transform: translateX(2px);
+  color: var(--color-hegra-turquoise);
+}
+
+.overviewTableCell {
+  padding: 0.625rem 0.875rem;
+  font-size: 0.8125rem;
+  color: var(--color-hegra-navy);
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.overviewTableCellMain {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.overviewTableCellSub {
+  font-size: 0.6875rem;
+  color: #9ca3af;
+}
+
+.overviewTableCellEnd {
+  text-align: right;
+}
+
 .overviewEmpty {
   font-size: 0.8125rem;
   color: #9ca3af;

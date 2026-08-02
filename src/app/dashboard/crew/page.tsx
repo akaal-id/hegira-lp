@@ -1,15 +1,19 @@
 "use client";
 
-import { useState } from "react";
-import { PlusCircle, ShieldCheck } from "lucide-react";
+import { useMemo, useState } from "react";
+import { PlusCircle, Search } from "lucide-react";
 import DataTable, { type DataTableColumn } from "@/components/dashboard/data-table/DataTable";
 import StatusBadge, { type StatusTone } from "@/components/ui/status-badge/StatusBadge";
 import DashboardButton from "@/components/ui/dashboard-button/DashboardButton";
 import { initialCrew, type CrewMember } from "@/components/dashboard/mockData";
 import styles from "./crew.module.css";
 
+const ROLE_FILTERS = ["all", "Admin", "Gate Scanner", "Usher", "Coordinator"] as const;
+
 export default function CrewPage() {
   const [crew, setCrew] = useState<CrewMember[]>(initialCrew);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [roleFilter, setRoleFilter] = useState<(typeof ROLE_FILTERS)[number]>("all");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newCrew, setNewCrew] = useState({
     name: "",
@@ -36,6 +40,16 @@ export default function CrewPage() {
     setNewCrew({ name: "", email: "", role: "Gate Scanner" });
     setIsModalOpen(false);
   };
+
+  const filteredCrew = useMemo(() => {
+    return crew.filter((member) => {
+      const matchesSearch =
+        member.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        member.email.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesRole = roleFilter === "all" || member.role === roleFilter;
+      return matchesSearch && matchesRole;
+    });
+  }, [crew, searchTerm, roleFilter]);
 
   const columns: DataTableColumn<CrewMember>[] = [
     {
@@ -77,20 +91,45 @@ export default function CrewPage() {
     <div className={styles.container}>
       {/* Header */}
       <div className={styles.headerBar}>
-        <div>
-          <h1 className={styles.title}>
-            <ShieldCheck className="text-[var(--color-hegra-turquoise)]" /> Crew Management
-          </h1>
-          <p className={styles.subtitle}>
-            Assign and manage staff members, gate scanners, and operational permissions.
-          </p>
+        <p className={styles.headerEyebrow}>Event Management</p>
+        <h1 className={styles.title}>Crew Management</h1>
+        <p className={styles.subtitle}>
+          Assign and manage staff members, gate scanners, and operational permissions.
+        </p>
+      </div>
+
+      {/* Toolbar */}
+      <div className={styles.toolbar}>
+        <div className={styles.searchWrapper}>
+          <Search size={18} className={styles.searchIcon} />
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Search crew by name or email..."
+            className={styles.searchInput}
+          />
         </div>
+
+        {ROLE_FILTERS.map((f) => (
+          <DashboardButton
+            key={f}
+            variant="filter"
+            size="sm"
+            active={roleFilter === f}
+            onClick={() => setRoleFilter(f)}
+            className={styles.toolbarBtn}
+          >
+            {f === "all" ? "All" : f}
+          </DashboardButton>
+        ))}
 
         <DashboardButton
           variant="primary"
           size="md"
           icon={<PlusCircle size={16} />}
           onClick={() => setIsModalOpen(true)}
+          className={styles.toolbarBtn}
         >
           Assign New Crew Member
         </DashboardButton>
@@ -99,8 +138,9 @@ export default function CrewPage() {
       {/* Crew Table */}
       <div className={styles.tableCard}>
         <DataTable
-          data={crew}
+          data={filteredCrew}
           columns={columns}
+          emptyStateMessage="No crew members match your search."
           renderMobileCard={(row: CrewMember) => (
             <div style={{ padding: "0.75rem", display: "flex", flexDirection: "column", gap: "0.375rem" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>

@@ -1,25 +1,31 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Search, ShoppingCart } from "lucide-react";
+import { Search } from "lucide-react";
 import DataTable, { type DataTableColumn } from "@/components/dashboard/data-table/DataTable";
+import DashboardButton from "@/components/ui/dashboard-button/DashboardButton";
 import StatusBadge, { type StatusTone } from "@/components/ui/status-badge/StatusBadge";
 import { initialOrders, type OrderItem } from "@/components/dashboard/mockData";
 import styles from "./orders.module.css";
 
+const STATUS_FILTERS = ["all", "Paid", "Pending", "Failed"] as const;
+
 export default function OrdersPage() {
   const [orders] = useState<OrderItem[]>(initialOrders);
   const [searchTerm, setSearchTerm] = useState("");
+  const [statusFilter, setStatusFilter] = useState<(typeof STATUS_FILTERS)[number]>("all");
 
   const filteredOrders = useMemo(() => {
-    return orders.filter(
-      (ord) =>
+    return orders.filter((ord) => {
+      const matchesSearch =
         ord.orderNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
         ord.buyerName.toLowerCase().includes(searchTerm.toLowerCase()) ||
         ord.buyerEmail.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        ord.ticketName.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  }, [orders, searchTerm]);
+        ord.ticketName.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesStatus = statusFilter === "all" || ord.status === statusFilter;
+      return matchesSearch && matchesStatus;
+    });
+  }, [orders, searchTerm, statusFilter]);
 
   const getStatusTone = (status: string): StatusTone => {
     if (status === "Paid") return "positive";
@@ -80,15 +86,14 @@ export default function OrdersPage() {
     <div className={styles.container}>
       {/* Header */}
       <div className={styles.headerBar}>
-        <h1 className={styles.title}>
-          <ShoppingCart className="text-[var(--color-hegra-turquoise)]" /> Orders & Transactions
-        </h1>
+        <p className={styles.headerEyebrow}>Event Management</p>
+        <h1 className={styles.title}>Orders & Transactions</h1>
         <p className={styles.subtitle}>
           Track ticket purchase transactions, customer payments, and order statuses.
         </p>
       </div>
 
-      {/* Toolbar Search */}
+      {/* Toolbar */}
       <div className={styles.toolbar}>
         <div className={styles.searchWrapper}>
           <Search size={18} className={styles.searchIcon} />
@@ -100,6 +105,19 @@ export default function OrdersPage() {
             className={styles.searchInput}
           />
         </div>
+
+        {STATUS_FILTERS.map((f) => (
+          <DashboardButton
+            key={f}
+            variant="filter"
+            size="sm"
+            active={statusFilter === f}
+            onClick={() => setStatusFilter(f)}
+            className={styles.toolbarBtn}
+          >
+            {f === "all" ? "All" : f}
+          </DashboardButton>
+        ))}
       </div>
 
       {/* Orders Data Table */}

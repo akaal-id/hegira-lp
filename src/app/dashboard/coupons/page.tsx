@@ -1,14 +1,19 @@
 "use client";
 
-import { useState } from "react";
-import { PlusCircle, Tag } from "lucide-react";
+import { useMemo, useState } from "react";
+import { PlusCircle, Search } from "lucide-react";
 import CouponItemCard from "@/components/dashboard/coupon-item-card/CouponItemCard";
 import DashboardButton from "@/components/ui/dashboard-button/DashboardButton";
-import { initialCoupons, type CouponItem } from "@/components/dashboard/mockData";
+import type { StatusTone } from "@/components/ui/status-badge/StatusBadge";
+import { initialCoupons, initialDashboardEvents, type CouponItem } from "@/components/dashboard/mockData";
 import styles from "./coupons.module.css";
+
+const STATUS_FILTERS = ["all", "Active", "Inactive", "Expired"] as const;
 
 export default function CouponsPage() {
   const [coupons, setCoupons] = useState<CouponItem[]>(initialCoupons);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [statusFilter, setStatusFilter] = useState<(typeof STATUS_FILTERS)[number]>("all");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newCoupon, setNewCoupon] = useState({
     code: "",
@@ -17,6 +22,24 @@ export default function CouponsPage() {
     quota: 100,
     validUntil: "2026-12-31",
   });
+
+  const filteredCoupons = useMemo(() => {
+    return coupons.filter((cpn) => {
+      const matchesSearch = cpn.code.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesStatus = statusFilter === "all" || cpn.status === statusFilter;
+      return matchesSearch && matchesStatus;
+    });
+  }, [coupons, searchTerm, statusFilter]);
+
+  const getStatusTone = (status: string): StatusTone => {
+    if (status === "Active") return "positive";
+    if (status === "Expired") return "neutral";
+    return "warning";
+  };
+
+  const handleDelete = (id: string) => {
+    setCoupons((prev) => prev.filter((c) => c.id !== id));
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,45 +72,80 @@ export default function CouponsPage() {
     <div className={styles.container}>
       {/* Header */}
       <div className={styles.headerBar}>
-        <div>
-          <h1 className={styles.title}>
-            <Tag className="text-[var(--color-hegra-yellow)]" /> Coupon Management
-          </h1>
-          <p className={styles.subtitle}>
-            Create promotional discount codes to boost ticket sales for your event.
-          </p>
+        <p className={styles.headerEyebrow}>Event Management</p>
+        <h1 className={styles.title}>Coupon Management</h1>
+        <p className={styles.subtitle}>
+          Create promotional discount codes to boost ticket sales for your event.
+        </p>
+      </div>
+
+      {/* Toolbar */}
+      <div className={styles.toolbar}>
+        <div className={styles.searchWrapper}>
+          <Search size={18} className={styles.searchIcon} />
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Search coupons by code..."
+            className={styles.searchInput}
+          />
         </div>
+
+        {STATUS_FILTERS.map((f) => (
+          <DashboardButton
+            key={f}
+            variant="filter"
+            size="sm"
+            active={statusFilter === f}
+            onClick={() => setStatusFilter(f)}
+            className={styles.toolbarBtn}
+          >
+            {f === "all" ? "All" : f}
+          </DashboardButton>
+        ))}
 
         <DashboardButton
           variant="primary"
           size="md"
           icon={<PlusCircle size={16} />}
           onClick={() => setIsModalOpen(true)}
+          className={styles.toolbarBtn}
         >
           Create New Coupon
         </DashboardButton>
       </div>
 
       {/* Coupon Grid */}
-      <div className={styles.grid}>
-        {coupons.map((cpn) => (
-          <CouponItemCard
-            key={cpn.id}
-            coupon={{
-              id: cpn.id,
-              name: `Coupon ${cpn.code}`,
-              code: cpn.code,
-              eventName: "Sunset Music Fest",
-              discountLabel:
-                cpn.discountType === "percentage"
-                  ? `${cpn.discountValue}% OFF`
-                  : `Rp ${cpn.discountValue.toLocaleString("id-ID")} OFF`,
-              quantity: cpn.quota - cpn.used,
-              validity: cpn.validUntil,
-            }}
-          />
-        ))}
-      </div>
+      {filteredCoupons.length > 0 ? (
+        <div className={styles.grid}>
+          {filteredCoupons.map((cpn) => {
+            const event = initialDashboardEvents.find((e) => e.id === cpn.eventId);
+
+            return (
+              <CouponItemCard
+                key={cpn.id}
+                coupon={{
+                  id: cpn.id,
+                  code: cpn.code,
+                  eventName: event?.name || "Unknown Event",
+                  discountLabel:
+                    cpn.discountType === "percentage"
+                      ? `${cpn.discountValue}% OFF`
+                      : `Rp ${cpn.discountValue.toLocaleString("id-ID")} OFF`,
+                  quota: cpn.quota,
+                  used: cpn.used,
+                  validity: cpn.validUntil,
+                  status: { label: cpn.status, tone: getStatusTone(cpn.status) },
+                }}
+                onDelete={() => handleDelete(cpn.id)}
+              />
+            );
+          })}
+        </div>
+      ) : (
+        <p className={styles.emptyText}>No coupons match your search.</p>
+      )}
 
       {/* Modal Add Coupon */}
       {isModalOpen && (

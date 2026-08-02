@@ -38,9 +38,24 @@ interface DateFieldProps {
   onChange: (value: string) => void;
   required?: boolean;
   className?: string;
+  /** Inclusive ISO bounds (YYYY-MM-DD). Days outside this range render disabled. */
+  min?: string;
+  max?: string;
+  helper?: string;
+  disabled?: boolean;
 }
 
-export default function DateField({ label, value, onChange, required = false, className }: DateFieldProps) {
+export default function DateField({
+  label,
+  value,
+  onChange,
+  required = false,
+  className,
+  min,
+  max,
+  helper,
+  disabled = false,
+}: DateFieldProps) {
   const selected = parseIsoDate(value);
   const [isOpen, setIsOpen] = useState(false);
   const [viewMonth, setViewMonth] = useState(() => selected || new Date());
@@ -91,14 +106,18 @@ export default function DateField({ label, value, onChange, required = false, cl
 
   return (
     <div className={`${styles.fieldGroup} ${className || ""}`}>
-      <label className={styles.label}>
-        {label} {required && <span className={styles.required}>*</span>}
-      </label>
+      <div className={styles.labelRow}>
+        <label className={styles.label}>
+          {label} {required && <span className={styles.required}>*</span>}
+        </label>
+        {helper && <span className={styles.helper}>{helper}</span>}
+      </div>
       <div className={styles.triggerWrapper} ref={wrapperRef}>
         <button
           type="button"
+          disabled={disabled}
           onClick={() => (isOpen ? setIsOpen(false) : openPicker())}
-          className={`${styles.trigger} ${isOpen ? styles.triggerOpen : ""}`}
+          className={`${styles.trigger} ${isOpen ? styles.triggerOpen : ""} ${disabled ? styles.triggerDisabled : ""}`}
         >
           <span className={`${styles.triggerValue} ${!selected ? styles.triggerPlaceholder : ""}`}>
             {selected ? formatDisplay(selected) : "Select date"}
@@ -108,7 +127,7 @@ export default function DateField({ label, value, onChange, required = false, cl
           </span>
         </button>
 
-        {isOpen && (
+        {isOpen && !disabled && (
           <div className={`${styles.popover} ${styles.calendar}`}>
             <div className={styles.calendarHeader}>
               <button
@@ -140,17 +159,22 @@ export default function DateField({ label, value, onChange, required = false, cl
               {cells.map(({ date, muted }, i) => {
                 const isActive = selected ? isSameDay(date, selected) : false;
                 const isToday = isSameDay(date, today);
+                const iso = toIsoDate(date);
+                const isDisabled = Boolean((min && iso < min) || (max && iso > max));
                 return (
                   <button
                     key={i}
                     type="button"
+                    disabled={isDisabled}
                     onClick={() => {
-                      onChange(toIsoDate(date));
+                      onChange(iso);
                       setIsOpen(false);
                     }}
                     className={`${styles.calendarDay} ${muted ? styles.calendarDayMuted : ""} ${
                       isToday ? styles.calendarDayToday : ""
-                    } ${isActive ? styles.calendarDayActive : ""}`}
+                    } ${isActive ? styles.calendarDayActive : ""} ${
+                      isDisabled ? styles.calendarDayDisabled : ""
+                    }`}
                   >
                     {date.getDate()}
                   </button>

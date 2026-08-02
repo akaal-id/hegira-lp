@@ -33,9 +33,10 @@ interface TimeFieldProps {
   onChange: (value: string) => void;
   required?: boolean;
   className?: string;
+  disabled?: boolean;
 }
 
-export default function TimeField({ label, value, onChange, required = false, className }: TimeFieldProps) {
+export default function TimeField({ label, value, onChange, required = false, className, disabled = false }: TimeFieldProps) {
   const parsed = parseTime(value);
   const [isOpen, setIsOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -70,8 +71,9 @@ export default function TimeField({ label, value, onChange, required = false, cl
       <div className={styles.triggerWrapper} ref={wrapperRef}>
         <button
           type="button"
+          disabled={disabled}
           onClick={() => setIsOpen((v) => !v)}
-          className={`${styles.trigger} ${isOpen ? styles.triggerOpen : ""}`}
+          className={`${styles.trigger} ${isOpen ? styles.triggerOpen : ""} ${disabled ? styles.triggerDisabled : ""}`}
         >
           <span className={`${styles.triggerValue} ${!value ? styles.triggerPlaceholder : ""}`}>
             {value || "Select time"}
@@ -81,7 +83,7 @@ export default function TimeField({ label, value, onChange, required = false, cl
           </span>
         </button>
 
-        {isOpen && (
+        {isOpen && !disabled && (
           <div className={`${styles.popover} ${styles.timePopover}`}>
             <div className={styles.timeColumnHeaders}>
               <span>Hour</span>

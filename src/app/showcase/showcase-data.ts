@@ -100,21 +100,23 @@ export const ticketItems: TicketItemData[] = [
 export const couponItems: CouponItemData[] = [
   {
     id: "cpn-1",
-    name: "Early Bird Discount",
     code: "EARLYBIRD10",
     eventName: "Hei Talk Vol. 4",
-    discountLabel: "10%",
-    quantity: 200,
-    validity: "1 Jul – 1 Aug 2026",
+    discountLabel: "10% OFF",
+    quota: 200,
+    used: 84,
+    validity: "1 Aug 2026",
+    status: { label: "Active", tone: "positive" },
   },
   {
     id: "cpn-2",
-    name: "Community Partner",
     code: "COMMUNITY50K",
     eventName: "Culture Fest 2026",
-    discountLabel: "Rp 50.000",
-    quantity: 50,
+    discountLabel: "Rp 50.000 OFF",
+    quota: 50,
+    used: 50,
     validity: "Until sold out",
+    status: { label: "Expired", tone: "neutral" },
   },
 ];
 

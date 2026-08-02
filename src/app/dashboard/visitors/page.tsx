@@ -1,16 +1,19 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Search, Users } from "lucide-react";
+import { Search } from "lucide-react";
 import DataTable, { type DataTableColumn } from "@/components/dashboard/data-table/DataTable";
 import StatusBadge from "@/components/ui/status-badge/StatusBadge";
 import DashboardButton from "@/components/ui/dashboard-button/DashboardButton";
 import { initialVisitors, type VisitorItem } from "@/components/dashboard/mockData";
 import styles from "./visitors.module.css";
 
+const CHECKIN_FILTERS = ["all", "Checked In", "Not Checked In"] as const;
+
 export default function VisitorsPage() {
   const [visitors, setVisitors] = useState<VisitorItem[]>(initialVisitors);
   const [searchTerm, setSearchTerm] = useState("");
+  const [checkinFilter, setCheckinFilter] = useState<(typeof CHECKIN_FILTERS)[number]>("all");
 
   const handleToggleCheckIn = (visitorId: string) => {
     setVisitors((prev) =>
@@ -29,14 +32,18 @@ export default function VisitorsPage() {
   };
 
   const filteredVisitors = useMemo(() => {
-    return visitors.filter(
-      (v) =>
+    return visitors.filter((v) => {
+      const matchesSearch =
         v.ticketCode.toLowerCase().includes(searchTerm.toLowerCase()) ||
         v.visitorName.toLowerCase().includes(searchTerm.toLowerCase()) ||
         v.visitorEmail.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        v.ticketCategory.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  }, [visitors, searchTerm]);
+        v.ticketCategory.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesCheckin =
+        checkinFilter === "all" ||
+        (checkinFilter === "Checked In" ? v.isCheckedIn : !v.isCheckedIn);
+      return matchesSearch && matchesCheckin;
+    });
+  }, [visitors, searchTerm, checkinFilter]);
 
   const checkedInCount = useMemo(
     () => visitors.filter((v) => v.isCheckedIn).length,
@@ -103,10 +110,9 @@ export default function VisitorsPage() {
     <div className={styles.container}>
       {/* Header & Metric */}
       <div className={styles.headerBar}>
-        <div>
-          <h1 className={styles.title}>
-            <Users className="text-[var(--color-hegra-turquoise)]" /> Visitor Management
-          </h1>
+        <div className={styles.headerTextGroup}>
+          <p className={styles.headerEyebrow}>Event Management</p>
+          <h1 className={styles.title}>Visitor Management</h1>
           <p className={styles.subtitle}>
             Monitor attendee check-ins, ticket scans, and gate arrivals.
           </p>
@@ -120,7 +126,7 @@ export default function VisitorsPage() {
         </div>
       </div>
 
-      {/* Toolbar Search */}
+      {/* Toolbar */}
       <div className={styles.toolbar}>
         <div className={styles.searchWrapper}>
           <Search size={18} className={styles.searchIcon} />
@@ -132,6 +138,19 @@ export default function VisitorsPage() {
             className={styles.searchInput}
           />
         </div>
+
+        {CHECKIN_FILTERS.map((f) => (
+          <DashboardButton
+            key={f}
+            variant="filter"
+            size="sm"
+            active={checkinFilter === f}
+            onClick={() => setCheckinFilter(f)}
+            className={styles.toolbarBtn}
+          >
+            {f === "all" ? "All" : f}
+          </DashboardButton>
+        ))}
       </div>
 
       {/* Visitors Data Table */}
